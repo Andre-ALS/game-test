@@ -17,7 +17,6 @@ const DirectionalButtons = () => {
         frameCount={7}
         width={100}
         height={100}
-        duration={300}
         frameInterval={FRAME_INTERVAL}
         action="click"
         triggerKey="ArrowUp"
@@ -31,7 +30,6 @@ const DirectionalButtons = () => {
           frameCount={7}
           width={100}
           height={100}
-          duration={300}
           frameInterval={FRAME_INTERVAL}
           action="click"
           triggerKey="ArrowLeft"
@@ -44,7 +42,6 @@ const DirectionalButtons = () => {
           frameCount={7}
           width={100}
           height={100}
-          duration={300}
           frameInterval={FRAME_INTERVAL}
           action="click"
           triggerKey="ArrowRight"
@@ -58,7 +55,6 @@ const DirectionalButtons = () => {
         frameCount={7}
         width={100}
         height={100}
-        duration={300}
         frameInterval={FRAME_INTERVAL}
         action="click"
         triggerKey="ArrowDown"

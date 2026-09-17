@@ -12,7 +12,6 @@ interface SpriteProps {
   height: number;
   frameInterval: number;
   action: "hold" | "click";
-  duration?: number;
   triggerKey?: string;
   playing?: boolean;
 }
@@ -27,7 +26,6 @@ const Sprite = ({
   height,
   frameInterval,
   action,
-  duration,
   triggerKey,
   playing,
 }: SpriteProps) => {
@@ -89,7 +87,18 @@ const Sprite = ({
 
       while (elapsed >= frameInterval) {
         elapsed -= frameInterval;
-        currentFrame = (currentFrame + 1) % frameCount;
+
+        if (action === "click") {
+          if (currentFrame >= frameCount - 1) {
+            setInternalPlaying(false);
+            return;
+          }
+
+          currentFrame += 1;
+        } else {
+          currentFrame = (currentFrame + 1) % frameCount;
+        }
+
         setFrame(currentFrame);
       }
 
@@ -101,19 +110,7 @@ const Sprite = ({
     return () => {
       cancelAnimationFrame(frameId);
     };
-  }, [frameCount, frameInterval, isPlaying]);
-
-  useEffect(() => {
-    if (playing !== undefined || action !== "click" || !internalPlaying || duration == null) {
-      return;
-    }
-
-    const timeout = window.setTimeout(() => {
-      setInternalPlaying(false);
-    }, duration);
-
-    return () => window.clearTimeout(timeout);
-  }, [action, duration, internalPlaying, playing]);
+  }, [action, frameCount, frameInterval, isPlaying]);
 
   return (
     <div

@@ -6,44 +6,47 @@ import styles from "./Player.module.css";
 import { getFirstFreePosition, type Position } from "../../helpers/player";
 
 import spriteSheet from "../../assets/sprites/player.png";
+import { Directions } from "../../constants/ui/direction";
+import { FRAME_INTERVAL } from "../../constants/ui/frame";
+import { PLAYER_SIZE } from "../../constants/ui/player";
 
 interface PlayerProps {
   map: (number | null)[][];
   tileSize: number;
+  onMoveCallback: (position: Position, direction: Directions) => void;
 }
 
 const PLAYER_SHAPE: Position[] = [{ x: 0, y: 0 }];
 
 const MOVEMENT_DURATION = 250;
-const FRAME_INTERVAL = 60;
-const PLAYER_SIZE = 48;
 
-const DIRECTION_ROWS = {
-  ArrowDown: 0,
-  ArrowLeft: 1,
-  ArrowRight: 3,
-  ArrowUp: 2,
+const DIRECTION_ROWS: Record<Directions, number> = {
+  [Directions.DOWN]: 0,
+  [Directions.LEFT]: 1,
+  [Directions.RIGHT]: 3,
+  [Directions.UP]: 2,
 } as const;
 
-type Direction = keyof typeof DIRECTION_ROWS;
-
-const DELTAS: Record<Direction, Position> = {
-  ArrowUp: { x: 0, y: -1 },
-  ArrowDown: { x: 0, y: 1 },
-  ArrowLeft: { x: -1, y: 0 },
-  ArrowRight: { x: 1, y: 0 },
+const DELTAS: Record<Directions, Position> = {
+  [Directions.UP]: { x: 0, y: -1 },
+  [Directions.DOWN]: { x: 0, y: 1 },
+  [Directions.LEFT]: { x: -1, y: 0 },
+  [Directions.RIGHT]: { x: 1, y: 0 },
 };
 
-const Player = ({ map, tileSize }: PlayerProps) => {
+const Player = ({ map, tileSize, onMoveCallback }: PlayerProps) => {
   const startPosition = getFirstFreePosition(PLAYER_SHAPE, map)[0] ?? { x: 0, y: 0 };
 
   const playerRef = useRef<HTMLDivElement>(null);
-  const positionRef = useRef<Position[]>([{ ...startPosition }]);
   const isMovingRef = useRef(false);
   const animationRef = useRef<number | null>(null);
-  const keysPressedRef = useRef<Direction[]>([]);
+  const keysPressedRef = useRef<Directions[]>([]);
 
-  const [direction, setDirection] = useState<Direction>("ArrowDown");
+  const positionRef = useRef<Position[]>([{ ...startPosition }]);
+  const directionRef = useRef<Directions>(Directions.DOWN);
+
+  const [direction, setDirection] = useState<Directions>(Directions.DOWN);
+
   const [isMoving, setIsMoving] = useState(false);
 
   const setVisualPosition = (x: number, y: number) => {
@@ -58,13 +61,13 @@ const Player = ({ map, tileSize }: PlayerProps) => {
   };
 
   useEffect(() => {
-    const getNextDirection = (): Direction | null => {
+    const getNextDirection = (): Directions | null => {
       const keys = keysPressedRef.current;
 
       return keys.length > 0 ? keys[keys.length - 1] : null;
     };
 
-    const move = (moveDirection: Direction): boolean => {
+    const move = (moveDirection: Directions): boolean => {
       if (isMovingRef.current) {
         return false;
       }
@@ -75,8 +78,6 @@ const Player = ({ map, tileSize }: PlayerProps) => {
       const validMove = current.every(({ x, y }) => {
         return map[y + dy]?.[x + dx] === 0;
       });
-
-      setDirection(moveDirection);
 
       if (!validMove) {
         return false;
@@ -90,6 +91,8 @@ const Player = ({ map, tileSize }: PlayerProps) => {
       positionRef.current = nextPosition;
       isMovingRef.current = true;
       setIsMoving(true);
+
+      onMoveCallback(nextPosition[0], moveDirection);
 
       const start = current[0];
       const end = nextPosition[0];
@@ -134,7 +137,7 @@ const Player = ({ map, tileSize }: PlayerProps) => {
 
       event.preventDefault();
 
-      const moveDirection = event.key as Direction;
+      const moveDirection = event.key as Directions;
       const keys = keysPressedRef.current;
       const existingIndex = keys.indexOf(moveDirection);
 
@@ -143,10 +146,15 @@ const Player = ({ map, tileSize }: PlayerProps) => {
       }
 
       keys.push(moveDirection);
+
+      const previousDirection = directionRef.current;
+      directionRef.current = moveDirection;
       setDirection(moveDirection);
 
-      if (!isMovingRef.current) {
-        move(moveDirection);
+      const moved = !isMovingRef.current && move(moveDirection);
+
+      if (!moved && previousDirection !== moveDirection) {
+        onMoveCallback(positionRef.current[0], moveDirection);
       }
     };
 

@@ -3,8 +3,7 @@ import Sprite from "../Sprite/Sprite";
 import styles from "./DirectionalButtons.module.css";
 
 import spriteSheet from "../../assets/sprites/buttons.png";
-
-const FRAME_INTERVAL = 60;
+import { FRAME_INTERVAL } from "../../constants/ui/frame";
 
 const DirectionalButtons = () => {
   return (

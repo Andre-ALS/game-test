@@ -4,26 +4,10 @@ import styles from "./App.module.css";
 
 import DirectionalButtons from "./components/DirectionalButtons/DirectionalButtons";
 import Player from "./components/Player/Player";
+import { BASE_MAP, TILE_COLORS } from "./constants/ui/map";
 
-const BASE_MAP: (number | null)[][] = [
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
-  [1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
-  [1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1],
-  [1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1],
-  [1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1],
-  [1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1],
-  [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
-  [1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
-  [1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1],
-  [1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-];
-
-const EXPANDED_MAP = BASE_MAP;
-
-const TILE_SIZE = 40;
+import groundImage from "./assets/ground.png";
+import { TILE_SIZE } from "./constants/ui/tile";
 
 const App = () => {
   return (
@@ -33,34 +17,39 @@ const App = () => {
         style={
           {
             "--tile-size": `${TILE_SIZE}px`,
-            "--columns": Math.max(...EXPANDED_MAP.map((row) => row.length)),
-            "--rows": EXPANDED_MAP.length,
+            "--columns": Math.max(...BASE_MAP.map((row) => row.length)),
+            "--rows": BASE_MAP.length,
           } as React.CSSProperties
         }
       >
-        {EXPANDED_MAP.map((row, y) =>
+        {BASE_MAP.map((row, y) =>
           row.map((tile, x) => (
             <div
               key={`${x}-${y}`}
-              className={clsx(styles.tile, tile === 1 && styles.wall)}
-              style={{
-                gridColumn: x + 1,
-                gridRow: y + 1,
-              }}
-            >
-              {tile === 0 && (
-                <div
-                  className={styles.floor}
-                  style={{
-                    backgroundPosition: `-${x * TILE_SIZE}px -${y * TILE_SIZE}px`,
-                  }}
-                />
-              )}
-            </div>
+              className={clsx(styles.tile)}
+              style={
+                {
+                  gridColumn: x + 1,
+                  gridRow: y + 1,
+                  "--tile-color": `${TILE_COLORS[tile ?? -1]}`,
+                  "--background-image": tile === 0 ? `url(${groundImage})` : "none",
+                } as React.CSSProperties
+              }
+            />
           )),
         )}
 
-        <Player map={EXPANDED_MAP} tileSize={TILE_SIZE} />
+        <Player
+          map={BASE_MAP}
+          tileSize={TILE_SIZE}
+          onMoveCallback={(position, direction) => {
+            // check where the player is moving/looking at
+            console.log({
+              position,
+              direction,
+            });
+          }}
+        />
       </div>
 
       <DirectionalButtons />

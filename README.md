@@ -96,10 +96,10 @@ Agents: do not assume the restaurant model is wired. Prefer connecting a **thin 
 
 Track these anytime; small PR-friendly:
 
-- [ ] Remove unused `App.module.css` `.playerImg` leftover
-- [ ] Remove or use `src/assets/cat.png`
-- [ ] Decide what to keep under `sprites/` (packs vs what `src/assets` actually imports)
-- [ ] Share constants like `TILE_SIZE` / `FRAME_INTERVAL` (duplicated today)
+- [x] Remove unused `App.module.css` `.playerImg` leftover
+- [x] Remove or use `src/assets/cat.png`
+- [x] Decide what to keep under `sprites/` (packs vs what `src/assets` actually imports)
+- [x] Share constants like `TILE_SIZE` / `FRAME_INTERVAL` (duplicated today)
 - [ ] Wire DirectionalButtons to movement **or** document them as display-only forever
 - [ ] Rename / clarify `PlayerProgress` vs component `Player` when domain is wired
 - [ ] Trim `BASE_RECIPES` for MVP (or add a `MVP_RECIPES` export) so agents don’t load the whole catalog

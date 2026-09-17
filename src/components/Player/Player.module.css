@@ -1,0 +1,18 @@
+.player {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+
+  align-self: start;
+  justify-self: start;
+
+  position: relative;
+
+  z-index: 2;
+
+  transform: translate(
+    calc(var(--player-x) * var(--tile-size)),
+    calc(var(--player-y) * var(--tile-size))
+  );
+
+  transition: transform 300ms linear;
+}

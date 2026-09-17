@@ -1,0 +1,53 @@
+.game {
+  display: grid;
+
+  grid-template-columns: repeat(var(--columns), var(--tile-size));
+  grid-template-rows: repeat(var(--rows), var(--tile-size));
+
+  width: fit-content;
+
+  position: relative;
+}
+
+.tile {
+  width: var(--tile-size);
+  height: var(--tile-size);
+
+  position: relative;
+}
+
+.playerImg {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+
+  align-self: start;
+  justify-self: start;
+
+  width: var(--tile-size);
+  height: var(--tile-size);
+
+  position: relative;
+
+  z-index: 2;
+
+  top: -16px;
+
+  transform: translate(
+    calc(var(--player-x) * var(--tile-size)),
+    calc(var(--player-y) * var(--tile-size))
+  );
+
+  transition: transform 150ms linear;
+}
+
+.wall {
+  background: black;
+}
+
+.floor {
+  position: absolute;
+  inset: 0;
+
+  background-image: url("./assets/ground.jpg");
+  background-size: 200px 200px;
+}

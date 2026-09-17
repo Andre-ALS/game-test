@@ -1,0 +1,11 @@
+body,
+#root {
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100vw;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+}

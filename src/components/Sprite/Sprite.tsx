@@ -10,9 +10,11 @@ interface SpriteProps {
   frameCount: number;
   width: number;
   height: number;
-  duration: number;
+  frameInterval: number;
   action: "hold" | "click";
-  triggerKey: string;
+  duration?: number;
+  triggerKey?: string;
+  playing?: boolean;
 }
 
 const Sprite = ({
@@ -23,32 +25,40 @@ const Sprite = ({
   frameCount,
   width,
   height,
-  duration,
+  frameInterval,
   action,
+  duration,
   triggerKey,
+  playing,
 }: SpriteProps) => {
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [internalPlaying, setInternalPlaying] = useState(false);
+  const [frame, setFrame] = useState(0);
+
+  const isPlaying = playing !== undefined ? playing : internalPlaying;
+  const displayFrame = isPlaying ? frame : 0;
 
   useEffect(() => {
-    const normalizedKey = triggerKey.toLowerCase();
+    if (playing !== undefined || !triggerKey) {
+      return;
+    }
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key.toLowerCase() !== normalizedKey) {
+      if (event.key !== triggerKey) {
         return;
       }
 
       if (action === "hold") {
-        setIsAnimating(true);
+        setInternalPlaying(true);
       }
 
       if (action === "click" && !event.repeat) {
-        setIsAnimating(true);
+        setInternalPlaying(true);
       }
     };
 
     const handleKeyUp = (event: KeyboardEvent) => {
-      if (action === "hold" && event.key.toLowerCase() === normalizedKey) {
-        setIsAnimating(false);
+      if (action === "hold" && event.key === triggerKey) {
+        setInternalPlaying(false);
       }
     };
 
@@ -59,19 +69,51 @@ const Sprite = ({
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     };
-  }, [action, triggerKey]);
+  }, [action, triggerKey, playing]);
 
   useEffect(() => {
-    if (action !== "click" || !isAnimating) {
+    if (!isPlaying) {
+      return;
+    }
+
+    setFrame(0);
+
+    let currentFrame = 0;
+    let lastTime = performance.now();
+    let elapsed = 0;
+    let frameId = 0;
+
+    const tick = (now: number) => {
+      elapsed += now - lastTime;
+      lastTime = now;
+
+      while (elapsed >= frameInterval) {
+        elapsed -= frameInterval;
+        currentFrame = (currentFrame + 1) % frameCount;
+        setFrame(currentFrame);
+      }
+
+      frameId = requestAnimationFrame(tick);
+    };
+
+    frameId = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+    };
+  }, [frameCount, frameInterval, isPlaying]);
+
+  useEffect(() => {
+    if (playing !== undefined || action !== "click" || !internalPlaying || duration == null) {
       return;
     }
 
     const timeout = window.setTimeout(() => {
-      setIsAnimating(false);
+      setInternalPlaying(false);
     }, duration);
 
     return () => window.clearTimeout(timeout);
-  }, [action, duration, isAnimating]);
+  }, [action, duration, internalPlaying, playing]);
 
   return (
     <div
@@ -82,19 +124,14 @@ const Sprite = ({
       }}
     >
       <div
-        className={`${styles.sheet} ${isAnimating ? styles.animating : ""}`}
-        style={
-          {
-            width: columns * width,
-            height: rows * height,
-            backgroundImage: `url(${image})`,
-            backgroundSize: `${columns * width}px ${rows * height}px`,
-            backgroundPosition: `0 -${row * height}px`,
-            "--animation-width": `${(frameCount - 1) * width}px`,
-            "--frame-count": frameCount,
-            "--duration": `${duration}ms`,
-          } as React.CSSProperties
-        }
+        className={styles.sheet}
+        style={{
+          width: columns * width,
+          height: rows * height,
+          backgroundImage: `url(${image})`,
+          backgroundSize: `${columns * width}px ${rows * height}px`,
+          backgroundPosition: `-${displayFrame * width}px -${row * height}px`,
+        }}
       />
     </div>
   );

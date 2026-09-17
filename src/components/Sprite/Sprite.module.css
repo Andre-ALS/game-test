@@ -8,25 +8,6 @@
   position: absolute;
   top: 0;
   left: 0;
-
   background-repeat: no-repeat;
-
   image-rendering: pixelated;
-}
-
-.animating {
-  animation-name: walk;
-  animation-duration: var(--duration);
-  animation-timing-function: steps(calc(var(--frame-count) - 1));
-  animation-iteration-count: infinite;
-}
-
-@keyframes walk {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(calc(var(--animation-width) * -1));
-  }
 }

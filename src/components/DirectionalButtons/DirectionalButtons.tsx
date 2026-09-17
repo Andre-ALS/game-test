@@ -4,6 +4,8 @@ import styles from "./DirectionalButtons.module.css";
 
 import spriteSheet from "../../assets/sprites/buttons.png";
 
+const FRAME_INTERVAL = 60;
+
 const DirectionalButtons = () => {
   return (
     <div className={styles.vertical}>
@@ -16,6 +18,7 @@ const DirectionalButtons = () => {
         width={100}
         height={100}
         duration={300}
+        frameInterval={FRAME_INTERVAL}
         action="click"
         triggerKey="ArrowUp"
       />
@@ -29,6 +32,7 @@ const DirectionalButtons = () => {
           width={100}
           height={100}
           duration={300}
+          frameInterval={FRAME_INTERVAL}
           action="click"
           triggerKey="ArrowLeft"
         />
@@ -41,6 +45,7 @@ const DirectionalButtons = () => {
           width={100}
           height={100}
           duration={300}
+          frameInterval={FRAME_INTERVAL}
           action="click"
           triggerKey="ArrowRight"
         />
@@ -54,6 +59,7 @@ const DirectionalButtons = () => {
         width={100}
         height={100}
         duration={300}
+        frameInterval={FRAME_INTERVAL}
         action="click"
         triggerKey="ArrowDown"
       />

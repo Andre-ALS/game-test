@@ -2,8 +2,6 @@ import clsx from "clsx";
 
 import styles from "./App.module.css";
 
-import type { Position } from "./helpers/player";
-
 import DirectionalButtons from "./components/DirectionalButtons/DirectionalButtons";
 import Player from "./components/Player/Player";
 
@@ -23,8 +21,6 @@ const BASE_MAP: (number | null)[][] = [
 ];
 
 const EXPANDED_MAP = BASE_MAP;
-
-const PLAYER_SHAPE: Position[] = [{ x: 0, y: 0 }];
 
 const TILE_SIZE = 40;
 
@@ -63,7 +59,7 @@ const App = () => {
           )),
         )}
 
-        <Player map={EXPANDED_MAP} shape={PLAYER_SHAPE} tileSize={TILE_SIZE} />
+        <Player map={EXPANDED_MAP} tileSize={TILE_SIZE} />
       </div>
 
       <DirectionalButtons />

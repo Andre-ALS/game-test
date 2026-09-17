@@ -41,13 +41,13 @@
 }
 
 .wall {
-  background: black;
+  background: grey;
 }
 
 .floor {
   position: absolute;
   inset: 0;
 
-  background-image: url("./assets/ground.jpg");
-  background-size: 200px 200px;
+  background-image: url("./assets/ground.png");
+  background-size: 40px;
 }

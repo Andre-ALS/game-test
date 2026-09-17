@@ -1,102 +1,203 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Sprite from "../Sprite/Sprite";
+import styles from "./Player.module.css";
 
 import { getFirstFreePosition, type Position } from "../../helpers/player";
 
-import playerSprite from "../../assets/sprites/player.png";
-
-import styles from "./Player.module.css";
+import spriteSheet from "../../assets/sprites/player.png";
 
 interface PlayerProps {
   map: (number | null)[][];
-  shape: Position[];
   tileSize: number;
 }
 
-type Direction = "up" | "down" | "left" | "right";
+const PLAYER_SHAPE: Position[] = [{ x: 0, y: 0 }];
 
-const Player = ({ map, shape, tileSize }: PlayerProps) => {
-  const [position, setPosition] = useState<Position[]>(getFirstFreePosition(shape, map));
+const MOVEMENT_DURATION = 250;
+const FRAME_INTERVAL = 60;
+const PLAYER_SIZE = 48;
 
-  const [direction, setDirection] = useState<Direction>("down");
+const DIRECTION_ROWS = {
+  ArrowDown: 0,
+  ArrowLeft: 1,
+  ArrowRight: 3,
+  ArrowUp: 2,
+} as const;
 
-  const movePlayer = (dx: number, dy: number, direction: Direction) => {
-    setDirection(direction);
+type Direction = keyof typeof DIRECTION_ROWS;
 
-    setPosition((current) => {
+const DELTAS: Record<Direction, Position> = {
+  ArrowUp: { x: 0, y: -1 },
+  ArrowDown: { x: 0, y: 1 },
+  ArrowLeft: { x: -1, y: 0 },
+  ArrowRight: { x: 1, y: 0 },
+};
+
+const Player = ({ map, tileSize }: PlayerProps) => {
+  const startPosition = getFirstFreePosition(PLAYER_SHAPE, map)[0] ?? { x: 0, y: 0 };
+
+  const playerRef = useRef<HTMLDivElement>(null);
+  const positionRef = useRef<Position[]>([{ ...startPosition }]);
+  const isMovingRef = useRef(false);
+  const animationRef = useRef<number | null>(null);
+  const keysPressedRef = useRef<Direction[]>([]);
+
+  const [direction, setDirection] = useState<Direction>("ArrowDown");
+  const [isMoving, setIsMoving] = useState(false);
+
+  const setVisualPosition = (x: number, y: number) => {
+    const element = playerRef.current;
+
+    if (!element) {
+      return;
+    }
+
+    element.style.setProperty("--player-x", String(x));
+    element.style.setProperty("--player-y", String(y));
+  };
+
+  useEffect(() => {
+    const getNextDirection = (): Direction | null => {
+      const keys = keysPressedRef.current;
+
+      return keys.length > 0 ? keys[keys.length - 1] : null;
+    };
+
+    const move = (moveDirection: Direction): boolean => {
+      if (isMovingRef.current) {
+        return false;
+      }
+
+      const { x: dx, y: dy } = DELTAS[moveDirection];
+      const current = positionRef.current;
+
       const validMove = current.every(({ x, y }) => {
         return map[y + dy]?.[x + dx] === 0;
       });
 
+      setDirection(moveDirection);
+
       if (!validMove) {
-        return current;
+        return false;
       }
 
-      return current.map(({ x, y }) => ({
+      const nextPosition = current.map(({ x, y }) => ({
         x: x + dx,
         y: y + dy,
       }));
-    });
-  };
 
-  useEffect(() => {
+      positionRef.current = nextPosition;
+      isMovingRef.current = true;
+      setIsMoving(true);
+
+      const start = current[0];
+      const end = nextPosition[0];
+      const startTime = performance.now();
+
+      const animate = (currentTime: number) => {
+        const progress = Math.min((currentTime - startTime) / MOVEMENT_DURATION, 1);
+
+        setVisualPosition(
+          start.x + (end.x - start.x) * progress,
+          start.y + (end.y - start.y) * progress,
+        );
+
+        if (progress < 1) {
+          animationRef.current = requestAnimationFrame(animate);
+          return;
+        }
+
+        setVisualPosition(end.x, end.y);
+
+        isMovingRef.current = false;
+        animationRef.current = null;
+
+        const nextDirection = getNextDirection();
+
+        if (nextDirection && move(nextDirection)) {
+          return;
+        }
+
+        setIsMoving(false);
+      };
+
+      animationRef.current = requestAnimationFrame(animate);
+
+      return true;
+    };
+
     const handleKeyDown = (event: KeyboardEvent) => {
-      switch (event.key) {
-        case "ArrowUp":
-          movePlayer(0, -1, "up");
-          break;
+      if (!(event.key in DIRECTION_ROWS)) {
+        return;
+      }
 
-        case "ArrowDown":
-          movePlayer(0, 1, "down");
-          break;
+      event.preventDefault();
 
-        case "ArrowLeft":
-          movePlayer(-1, 0, "left");
-          break;
+      const moveDirection = event.key as Direction;
+      const keys = keysPressedRef.current;
+      const existingIndex = keys.indexOf(moveDirection);
 
-        case "ArrowRight":
-          movePlayer(1, 0, "right");
-          break;
+      if (existingIndex !== -1) {
+        keys.splice(existingIndex, 1);
+      }
+
+      keys.push(moveDirection);
+      setDirection(moveDirection);
+
+      if (!isMovingRef.current) {
+        move(moveDirection);
       }
     };
 
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (!(event.key in DIRECTION_ROWS)) {
+        return;
+      }
+
+      keysPressedRef.current = keysPressedRef.current.filter((key) => key !== event.key);
+    };
+
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+      window.removeEventListener("keyup", handleKeyUp);
 
-  const rows: Record<Direction, number> = {
-    down: 0,
-    left: 1,
-    right: 3,
-    up: 2,
-  };
+      if (animationRef.current !== null) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+      }
+
+      isMovingRef.current = false;
+      setIsMoving(false);
+    };
+  }, [map]);
 
   return (
     <div
+      ref={playerRef}
       className={styles.player}
       style={
         {
-          "--player-x": position[0].x,
-          "--player-y": position[0].y,
           "--tile-size": `${tileSize}px`,
+          "--player-x": startPosition.x,
+          "--player-y": startPosition.y,
         } as React.CSSProperties
       }
     >
       <Sprite
-        image={playerSprite}
+        image={spriteSheet}
         columns={5}
         rows={12}
-        row={rows[direction]}
-        frameCount={7}
-        width={tileSize}
-        height={tileSize}
-        duration={300}
+        row={DIRECTION_ROWS[direction]}
+        frameCount={5}
+        width={PLAYER_SIZE}
+        height={PLAYER_SIZE}
+        frameInterval={FRAME_INTERVAL}
         action="hold"
-        triggerKey={`Arrow${direction.charAt(0).toUpperCase() + direction.slice(1)}`}
+        playing={isMoving}
       />
     </div>
   );

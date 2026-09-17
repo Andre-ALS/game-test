@@ -5,14 +5,20 @@
   align-self: start;
   justify-self: start;
 
-  position: relative;
+  width: var(--tile-size);
+  height: var(--tile-size);
 
-  z-index: 2;
+  position: relative;
+  top: -14px;
+
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   transform: translate(
     calc(var(--player-x) * var(--tile-size)),
     calc(var(--player-y) * var(--tile-size))
   );
-
-  transition: transform 300ms linear;
 }

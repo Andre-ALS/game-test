@@ -61,6 +61,8 @@ const Player = ({ map, tileSize, onMoveCallback }: PlayerProps) => {
   };
 
   useEffect(() => {
+    onMoveCallback(positionRef.current[0], directionRef.current);
+
     const getNextDirection = (): Directions | null => {
       const keys = keysPressedRef.current;
 

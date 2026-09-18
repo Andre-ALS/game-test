@@ -1,56 +1,72 @@
-import clsx from "clsx";
+import { useState } from "react";
 
-import styles from "./App.module.css";
-
-import DirectionalButtons from "./components/DirectionalButtons/DirectionalButtons";
-import Player from "./components/Player/Player";
-import { BASE_MAP, TILE_COLORS } from "./constants/ui/map";
-
-import groundImage from "./assets/ground.png";
+import type { Position } from "./helpers/player";
 import { TILE_SIZE } from "./constants/ui/tile";
+import { Directions } from "./constants/ui/direction";
+import { BASE_MAP, Tiles } from "./constants/ui/map";
+
+import Tile from "./components/Tile/Tile";
+import Player from "./components/Player/Player";
+import GameMap from "./components/GameMap/GameMap";
+import DirectionalButtons from "./components/DirectionalButtons/DirectionalButtons";
 
 const App = () => {
+  // players view direction
+  const [playerPosition, setPlayerPosition] = useState<Position>({ x: 0, y: 0 });
+  const [playerViewDirection, setPlayerViewDirection] = useState<Position>({ x: 0, y: 0 });
+
   return (
     <>
       <div
-        className={styles.game}
-        style={
-          {
-            "--tile-size": `${TILE_SIZE}px`,
-            "--columns": Math.max(...BASE_MAP.map((row) => row.length)),
-            "--rows": BASE_MAP.length,
-          } as React.CSSProperties
-        }
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: 1000,
+          backgroundColor: "white",
+          padding: "10px",
+          borderRadius: "5px",
+          fontFamily: "monospace",
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px",
+        }}
       >
+        {[`📍 ${JSON.stringify(playerPosition)}`, `👁️ ${JSON.stringify(playerViewDirection)}`].map(
+          (text, index) => (
+            <div key={index}>{text}</div>
+          ),
+        )}
+      </div>
+
+      <GameMap>
         {BASE_MAP.map((row, y) =>
-          row.map((tile, x) => (
-            <div
-              key={`${x}-${y}`}
-              className={clsx(styles.tile)}
-              style={
-                {
-                  gridColumn: x + 1,
-                  gridRow: y + 1,
-                  "--tile-color": `${TILE_COLORS[tile ?? -1]}`,
-                  "--background-image": tile === 0 ? `url(${groundImage})` : "none",
-                } as React.CSSProperties
-              }
-            />
-          )),
+          row.map((tile, x) => <Tile key={`${x}-${y}`} x={x} y={y} tile={tile ?? Tiles.NONE} />),
         )}
 
         <Player
           map={BASE_MAP}
           tileSize={TILE_SIZE}
           onMoveCallback={(position, direction) => {
-            // check where the player is moving/looking at
-            console.log({
-              position,
-              direction,
-            });
+            setPlayerPosition(position);
+            // x and y in front of the player
+            switch (direction) {
+              case Directions.UP:
+                setPlayerViewDirection({ x: position.x, y: position.y - 1 });
+                break;
+              case Directions.DOWN:
+                setPlayerViewDirection({ x: position.x, y: position.y + 1 });
+                break;
+              case Directions.LEFT:
+                setPlayerViewDirection({ x: position.x - 1, y: position.y });
+                break;
+              case Directions.RIGHT:
+                setPlayerViewDirection({ x: position.x + 1, y: position.y });
+                break;
+            }
           }}
         />
-      </div>
+      </GameMap>
 
       <DirectionalButtons />
     </>

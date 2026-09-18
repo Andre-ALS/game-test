@@ -56,7 +56,15 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -79,6 +87,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.LEMON,
+        },
+        {
+          action: RecipeStepsActions.MIX,
           ingredient: Ingredients.LEMON,
         },
         {
@@ -119,6 +131,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
+          action: RecipeStepsActions.HEAT,
           ingredient: Ingredients.COFFEE,
         },
         {
@@ -182,6 +198,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.LEMON,
         },
@@ -229,6 +249,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.ICE,
         },
         {
+          action: RecipeStepsActions.BLEND,
+          ingredient: Ingredients.ICE,
+        },
+        {
           action: RecipeStepsActions.SERVE,
         },
       ],
@@ -246,6 +270,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
+          action: RecipeStepsActions.HEAT,
           ingredient: Ingredients.COFFEE,
         },
         {
@@ -275,6 +303,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.HONEY,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.SERVE,
         },
       ],
@@ -298,6 +330,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.SUGAR,
+        },
+        {
+          action: RecipeStepsActions.MIX,
           ingredient: Ingredients.SUGAR,
         },
         {
@@ -340,11 +376,19 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COFFEE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.FOAM,
+        },
+        {
+          action: RecipeStepsActions.MIX,
           ingredient: Ingredients.FOAM,
         },
         {
@@ -366,11 +410,19 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.CHOCOLATE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.CHOCOLATE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -442,11 +494,19 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.PEACH,
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -465,6 +525,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
+          action: RecipeStepsActions.HEAT,
           ingredient: Ingredients.COFFEE,
         },
         {
@@ -496,6 +560,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
@@ -505,6 +573,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -526,6 +598,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.STRAWBERRY,
         },
@@ -535,6 +611,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -556,11 +636,19 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COFFEE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.FOAM,
+        },
+        {
+          action: RecipeStepsActions.MIX,
           ingredient: Ingredients.FOAM,
         },
         {
@@ -586,6 +674,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COFFEE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.CHOCOLATE,
         },
@@ -595,6 +687,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.FOAM,
+        },
+        {
+          action: RecipeStepsActions.MIX,
           ingredient: Ingredients.FOAM,
         },
         {
@@ -674,6 +770,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.CHOCOLATE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.CHOCOLATE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
@@ -683,6 +783,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.SPRINKLES,
+        },
+        {
+          action: RecipeStepsActions.TOP,
           ingredient: Ingredients.SPRINKLES,
         },
         {
@@ -704,6 +808,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COFFEE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.CARAMEL,
         },
@@ -713,6 +821,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.FOAM,
+        },
+        {
+          action: RecipeStepsActions.MIX,
           ingredient: Ingredients.FOAM,
         },
         {
@@ -734,6 +846,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MANGO,
         },
@@ -743,6 +859,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -795,6 +915,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
@@ -808,6 +932,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -829,6 +957,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
@@ -842,6 +974,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -863,6 +999,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COFFEE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.CHOCOLATE,
         },
@@ -876,6 +1016,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.FOAM,
+        },
+        {
+          action: RecipeStepsActions.MIX,
           ingredient: Ingredients.FOAM,
         },
         {
@@ -897,6 +1041,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COFFEE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.VANILLA,
         },
@@ -906,6 +1054,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.FOAM,
+        },
+        {
+          action: RecipeStepsActions.MIX,
           ingredient: Ingredients.FOAM,
         },
         {
@@ -972,11 +1124,19 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COOKIE,
         },
         {
+          action: RecipeStepsActions.BLEND,
+          ingredient: Ingredients.COOKIE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.WHIPPED_CREAM,
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.SPRINKLES,
+        },
+        {
+          action: RecipeStepsActions.TOP,
           ingredient: Ingredients.SPRINKLES,
         },
         {
@@ -998,6 +1158,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.CHOCOLATE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.CHOCOLATE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
@@ -1011,6 +1175,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.SPRINKLES,
+        },
+        {
+          action: RecipeStepsActions.TOP,
           ingredient: Ingredients.SPRINKLES,
         },
         {
@@ -1032,6 +1200,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.STRAWBERRY,
         },
@@ -1041,6 +1213,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -1066,11 +1242,19 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COFFEE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -1104,6 +1288,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.MILK,
         },
         {
+          action: RecipeStepsActions.BLEND,
+          ingredient: Ingredients.MILK,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.CARAMEL,
         },
@@ -1113,6 +1301,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.SPRINKLES,
+        },
+        {
+          action: RecipeStepsActions.TOP,
           ingredient: Ingredients.SPRINKLES,
         },
         {
@@ -1136,6 +1328,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
@@ -1149,6 +1345,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -1174,6 +1374,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MANGO,
         },
@@ -1187,6 +1391,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -1212,11 +1420,19 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COFFEE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -1250,6 +1466,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COFFEE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.CHOCOLATE,
         },
@@ -1259,6 +1479,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -1292,6 +1516,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.MILK,
         },
         {
+          action: RecipeStepsActions.BLEND,
+          ingredient: Ingredients.MILK,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.CHOCOLATE,
         },
@@ -1305,6 +1533,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.SPRINKLES,
+        },
+        {
+          action: RecipeStepsActions.TOP,
           ingredient: Ingredients.SPRINKLES,
         },
         {
@@ -1326,6 +1558,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COFFEE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.CHOCOLATE,
         },
@@ -1339,6 +1575,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.FOAM,
+        },
+        {
+          action: RecipeStepsActions.MIX,
           ingredient: Ingredients.FOAM,
         },
         {
@@ -1401,6 +1641,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.CHOCOLATE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.CHOCOLATE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.MILK,
         },
@@ -1414,6 +1658,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.SPRINKLES,
+        },
+        {
+          action: RecipeStepsActions.TOP,
           ingredient: Ingredients.SPRINKLES,
         },
         {
@@ -1439,6 +1687,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.TEA,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.TEA,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.STRAWBERRY,
         },
@@ -1452,6 +1704,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.ICE,
+        },
+        {
+          action: RecipeStepsActions.BLEND,
           ingredient: Ingredients.ICE,
         },
         {
@@ -1477,6 +1733,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
           ingredient: Ingredients.COFFEE,
         },
         {
+          action: RecipeStepsActions.HEAT,
+          ingredient: Ingredients.COFFEE,
+        },
+        {
           action: RecipeStepsActions.ADD,
           ingredient: Ingredients.VANILLA,
         },
@@ -1490,6 +1750,10 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
         },
         {
           action: RecipeStepsActions.ADD,
+          ingredient: Ingredients.FOAM,
+        },
+        {
+          action: RecipeStepsActions.MIX,
           ingredient: Ingredients.FOAM,
         },
         {

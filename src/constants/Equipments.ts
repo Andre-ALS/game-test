@@ -1,4 +1,13 @@
 export enum Equipments {
+  CUP_STATION = "cup_station",
+  COFFEE_STATION = "coffee_station",
+  TEA_STATION = "tea_station",
+  WATER_STATION = "water_station",
+  MILK_STATION = "milk_station",
+  SODA_STATION = "soda_station",
+  JUICE_STATION = "juice_station",
+  CHOCOLATE_STATION = "chocolate_station",
+  ICE_STATION = "ice_station",
   PREPARATION_STATION = "preparation_station",
   MIXER = "mixer",
   BLENDER = "blender",
@@ -6,9 +15,19 @@ export enum Equipments {
   TOPPING_STATION = "topping_station",
   CUP_SEALER = "cup_sealer",
   SERVING_COUNTER = "serving_counter",
+  TRASH_BIN = "trash_bin",
 }
 
 export const EQUIPMENTS_NAMES: Record<Equipments, string> = {
+  [Equipments.CUP_STATION]: "Estação de copos",
+  [Equipments.COFFEE_STATION]: "Estação de café",
+  [Equipments.TEA_STATION]: "Estação de chá",
+  [Equipments.WATER_STATION]: "Estação de água",
+  [Equipments.MILK_STATION]: "Estação de leite",
+  [Equipments.SODA_STATION]: "Estação de refrigerante",
+  [Equipments.JUICE_STATION]: "Estação de suco",
+  [Equipments.CHOCOLATE_STATION]: "Estação de chocolate",
+  [Equipments.ICE_STATION]: "Estação de gelo",
   [Equipments.PREPARATION_STATION]: "Estação de preparo",
   [Equipments.MIXER]: "Misturador",
   [Equipments.BLENDER]: "Liquidificador",
@@ -16,4 +35,5 @@ export const EQUIPMENTS_NAMES: Record<Equipments, string> = {
   [Equipments.TOPPING_STATION]: "Estação de cobertura",
   [Equipments.CUP_SEALER]: "Seladora de copos",
   [Equipments.SERVING_COUNTER]: "Balcão de atendimento",
+  [Equipments.TRASH_BIN]: "Lixeira",
 };

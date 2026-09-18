@@ -7,10 +7,10 @@ export const INGREDIENT_OPERATIONS: Record<
   Partial<Record<RecipeStepsActions, Equipments[]>>
 > = {
   [Ingredients.CUP]: {
-    ADD: [Equipments.PREPARATION_STATION],
+    ADD: [Equipments.CUP_STATION],
   },
   [Ingredients.COFFEE]: {
-    ADD: [Equipments.PREPARATION_STATION],
+    ADD: [Equipments.COFFEE_STATION],
     HEAT: [Equipments.HEATING_STATION],
   },
   [Ingredients.LID]: {
@@ -18,15 +18,15 @@ export const INGREDIENT_OPERATIONS: Record<
     CLOSE: [Equipments.CUP_SEALER],
   },
   [Ingredients.TEA]: {
-    ADD: [Equipments.PREPARATION_STATION],
+    ADD: [Equipments.TEA_STATION],
     HEAT: [Equipments.HEATING_STATION],
   },
   [Ingredients.ICE]: {
-    ADD: [Equipments.PREPARATION_STATION],
+    ADD: [Equipments.ICE_STATION],
     BLEND: [Equipments.BLENDER],
   },
   [Ingredients.WATER]: {
-    ADD: [Equipments.PREPARATION_STATION],
+    ADD: [Equipments.WATER_STATION],
     HEAT: [Equipments.HEATING_STATION],
   },
   [Ingredients.LEMON]: {
@@ -35,16 +35,16 @@ export const INGREDIENT_OPERATIONS: Record<
     TOP: [Equipments.TOPPING_STATION],
   },
   [Ingredients.ORANGE_JUICE]: {
-    ADD: [Equipments.PREPARATION_STATION],
+    ADD: [Equipments.JUICE_STATION],
     MIX: [Equipments.MIXER],
   },
   [Ingredients.MILK]: {
-    ADD: [Equipments.PREPARATION_STATION],
+    ADD: [Equipments.MILK_STATION],
     MIX: [Equipments.MIXER],
     BLEND: [Equipments.BLENDER],
   },
   [Ingredients.CHOCOLATE]: {
-    ADD: [Equipments.PREPARATION_STATION],
+    ADD: [Equipments.CHOCOLATE_STATION],
     MIX: [Equipments.MIXER],
     HEAT: [Equipments.HEATING_STATION],
     TOP: [Equipments.TOPPING_STATION],
@@ -55,7 +55,7 @@ export const INGREDIENT_OPERATIONS: Record<
     TOP: [Equipments.TOPPING_STATION],
   },
   [Ingredients.SODA]: {
-    ADD: [Equipments.PREPARATION_STATION],
+    ADD: [Equipments.SODA_STATION],
     MIX: [Equipments.MIXER],
   },
   [Ingredients.HONEY]: {

@@ -6,7 +6,7 @@
 
   background-color: white;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 4px;
 
   font-family: monospace;
   font-size: 12px;
@@ -40,4 +40,38 @@
 .step {
   border-top: 1px solid #ccc;
   padding-top: 6px;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.checkItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #666;
+}
+
+.checkItemDone {
+  color: #111;
+  text-decoration: line-through;
+}
+
+.wrongSteps {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px dashed #f3a3a3;
+  color: #b91c1c;
+}
+
+.wrongStepsTitle {
+  font-weight: bold;
+}
+
+.wrongStepsList {
+  margin: 2px 0 0;
+  padding-left: 18px;
 }

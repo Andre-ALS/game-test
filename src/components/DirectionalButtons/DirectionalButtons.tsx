@@ -1,4 +1,4 @@
-import Sprite from "../Sprite/Sprite";
+import SpriteAnimation from "../SpriteAnimation/SpriteAnimation";
 
 import styles from "./DirectionalButtons.module.css";
 
@@ -8,7 +8,7 @@ import { FRAME_INTERVAL } from "../../constants/ui/frame";
 const DirectionalButtons = () => {
   return (
     <div className={styles.vertical}>
-      <Sprite
+      <SpriteAnimation
         image={spriteSheet}
         columns={7}
         rows={35}
@@ -21,7 +21,7 @@ const DirectionalButtons = () => {
         triggerKey="ArrowUp"
       />
       <div className={styles.horizontal}>
-        <Sprite
+        <SpriteAnimation
           image={spriteSheet}
           columns={7}
           rows={35}
@@ -33,7 +33,7 @@ const DirectionalButtons = () => {
           action="click"
           triggerKey="ArrowLeft"
         />
-        <Sprite
+        <SpriteAnimation
           image={spriteSheet}
           columns={7}
           rows={35}
@@ -46,7 +46,7 @@ const DirectionalButtons = () => {
           triggerKey="ArrowRight"
         />
       </div>
-      <Sprite
+      <SpriteAnimation
         image={spriteSheet}
         columns={7}
         rows={35}

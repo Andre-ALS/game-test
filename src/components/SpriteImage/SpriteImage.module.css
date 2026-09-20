@@ -1,0 +1,13 @@
+.sprite {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sheet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+}

@@ -1,6 +1,6 @@
 import styles from "./GameMap.module.css";
 
-import { BASE_MAP } from "../../constants/ui/map";
+import { GAME_MAP } from "../../constants/ui/map";
 import { TILE_SIZE } from "../../constants/ui/tile";
 
 interface GameMapProps {
@@ -14,8 +14,8 @@ const GameMap = ({ children }: GameMapProps) => {
       style={
         {
           "--tile-size": `${TILE_SIZE}px`,
-          "--columns": Math.max(...BASE_MAP.map((row) => row.length)),
-          "--rows": BASE_MAP.length,
+          "--columns": Math.max(...GAME_MAP.map((row) => row.length)),
+          "--rows": GAME_MAP.length,
         } as React.CSSProperties
       }
     >

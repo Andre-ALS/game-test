@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import styles from "./Sprite.module.css";
+import styles from "./SpriteAnimation.module.css";
 
 interface SpriteProps {
   image: string;
@@ -16,7 +16,7 @@ interface SpriteProps {
   playing?: boolean;
 }
 
-const Sprite = ({
+const SpriteAnimation = ({
   image,
   columns,
   rows,
@@ -134,4 +134,4 @@ const Sprite = ({
   );
 };
 
-export default Sprite;
+export default SpriteAnimation;

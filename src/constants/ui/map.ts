@@ -1,4 +1,5 @@
-import { Equipments } from "../Equipments";
+import { EQUIPMENT_FOOTPRINT, Equipments } from "../Equipments";
+import { sanitizeMap } from "../../helpers/map";
 
 export enum Tiles {
   NONE = -1,
@@ -67,17 +68,31 @@ export const TILE_TO_EQUIPMENT: Partial<Record<Tiles, Equipments>> = {
 };
 
 export const BASE_MAP: Tiles[][] = [
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 10, 0, 2, 0, 0, 3, 0, 0, 4, 0, 1],
-  [1, 11, 0, 12, 0, 0, 13, 0, 0, 14, 0, 1],
-  [1, 5, 0, 15, 0, 0, 16, 0, 0, 6, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 7, 0, 17, 0, 0, 18, 0, 0, 8, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 4, 0, 14, 0, 3, 0, 10, 10, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 11, 0, 12, 0, 13, 0, 2, 2, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 5, 0, 15, 0, 16, 0, 6, 6, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 7, 0, 17, 0, 18, 0, 8, 8, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 9, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
+
+export function getTileFootprint(tile: Tiles): number | undefined {
+  const equipment = TILE_TO_EQUIPMENT[tile];
+
+  return equipment === undefined ? undefined : EQUIPMENT_FOOTPRINT[equipment];
+}
+
+const sanitizedMap = sanitizeMap(BASE_MAP, {
+  floor: Tiles.FLOOR,
+  getFootprint: getTileFootprint,
+});
+
+export const GAME_MAP = sanitizedMap.map;
+export const GAME_MAP_PLACEMENTS = sanitizedMap.placements;

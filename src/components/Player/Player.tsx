@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import Sprite from "../Sprite/Sprite";
+import SpriteAnimation from "../SpriteAnimation/SpriteAnimation";
 import styles from "./Player.module.css";
 
 import { getFirstFreePosition, type Position } from "../../helpers/player";
@@ -191,13 +191,14 @@ const Player = ({ map, tileSize, onMoveCallback }: PlayerProps) => {
       className={styles.player}
       style={
         {
+          zIndex: positionRef.current[0].y + 1,
           "--tile-size": `${tileSize}px`,
           "--player-x": startPosition.x,
           "--player-y": startPosition.y,
         } as React.CSSProperties
       }
     >
-      <Sprite
+      <SpriteAnimation
         image={spriteSheet}
         columns={5}
         rows={12}

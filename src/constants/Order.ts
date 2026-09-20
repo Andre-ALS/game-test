@@ -4,5 +4,6 @@ export enum OrderStatus {
   IN_PROGRESS,
   READY,
   COMPLETED,
+  INCOMPLETE,
   FAILED,
 }

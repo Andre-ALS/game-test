@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import type { Position } from "./helpers/player";
 import { TILE_SIZE } from "./constants/ui/tile";
 import { Directions } from "./constants/ui/direction";
-import { BASE_MAP, Tiles, TILE_TO_EQUIPMENT } from "./constants/ui/map";
+import { GAME_MAP, Tiles, TILE_TO_EQUIPMENT } from "./constants/ui/map";
 
 import { usePreparation } from "./hooks/usePreparation";
 
@@ -29,7 +29,7 @@ const App = () => {
 
       event.preventDefault();
 
-      const facingTile = BASE_MAP[playerViewDirection.y]?.[playerViewDirection.x];
+      const facingTile = GAME_MAP[playerViewDirection.y]?.[playerViewDirection.x];
       const facingEquipment = TILE_TO_EQUIPMENT[facingTile];
 
       if (facingEquipment) {
@@ -54,7 +54,7 @@ const App = () => {
           zIndex: 1000,
           backgroundColor: "white",
           padding: "10px",
-          borderRadius: "5px",
+          borderRadius: "4px",
           fontFamily: "monospace",
           display: "flex",
           flexDirection: "column",
@@ -71,12 +71,12 @@ const App = () => {
       <OrderPanel preparation={preparation} />
 
       <GameMap>
-        {BASE_MAP.map((row, y) =>
+        {GAME_MAP.map((row, y) =>
           row.map((tile, x) => <Tile key={`${x}-${y}`} x={x} y={y} tile={tile ?? Tiles.NONE} />),
         )}
 
         <Player
-          map={BASE_MAP}
+          map={GAME_MAP}
           tileSize={TILE_SIZE}
           onMoveCallback={(position, direction) => {
             setPlayerPosition(position);

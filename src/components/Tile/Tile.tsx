@@ -2,9 +2,17 @@ import clsx from "clsx";
 
 import styles from "./Tile.module.css";
 
-import { BASE_MAP, TILE_COLORS, TILE_TO_EQUIPMENT, Tiles } from "../../constants/ui/map";
+import { EQUIPMENTS_ICONS } from "../../constants/Equipments";
+import {
+  GAME_MAP,
+  GAME_MAP_PLACEMENTS,
+  TILE_COLORS,
+  TILE_TO_EQUIPMENT,
+  Tiles,
+} from "../../constants/ui/map";
+import { getTilePlacement } from "../../helpers/map";
 
-import groundImage from "../../assets/ground.png";
+import groundImage from "../../assets/ground-2.png";
 
 interface TileProps {
   x: number;
@@ -13,8 +21,14 @@ interface TileProps {
 }
 
 const Tile = ({ x, y, tile }: TileProps) => {
-  const facingTile = BASE_MAP[y]?.[x];
+  const facingTile = GAME_MAP[y]?.[x];
   const facingEquipment = TILE_TO_EQUIPMENT[facingTile];
+  const placement = getTilePlacement(GAME_MAP_PLACEMENTS, x, y);
+  const equipmentIcon =
+    facingEquipment && placement.isAnchor ? EQUIPMENTS_ICONS[facingEquipment] : null;
+  const equipmentRotation = equipmentIcon?.rotations[placement.orientation];
+  const boxWidth = equipmentRotation ? equipmentRotation.width : 0;
+  const boxHeight = equipmentRotation ? equipmentRotation.height : 0;
 
   return (
     <div
@@ -24,13 +38,66 @@ const Tile = ({ x, y, tile }: TileProps) => {
         {
           gridColumn: x + 1,
           gridRow: y + 1,
-          fontFamily: "monospace",
           "--tile-color": `${TILE_COLORS[tile ?? -1]}`,
-          "--background-image": tile === 0 ? `url(${groundImage})` : "none",
+          "--background-image": tile === 0 || facingEquipment ? `url(${groundImage})` : "none",
+          position: "relative",
         } as React.CSSProperties
       }
     >
-      {facingEquipment}
+      {equipmentIcon && equipmentRotation && (
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: equipmentRotation.top,
+              left: equipmentRotation.left,
+              width: boxWidth,
+              height: boxHeight,
+              zIndex: y + 1,
+            }}
+          >
+            <img
+              src={equipmentIcon.src}
+              alt={equipmentIcon.alt}
+              height={equipmentRotation.height}
+              width={equipmentRotation.width}
+              style={{
+                position: "absolute",
+                left: (equipmentRotation.width - boxWidth) / 2,
+                top: (equipmentRotation.height - boxHeight) / 2,
+                transformOrigin: "center center",
+              }}
+            />
+          </div>
+          <div
+            style={{
+              position: "absolute",
+              top: "20px",
+              left: "1px",
+              zIndex: y + 1,
+              backgroundColor: "white",
+              padding: "1px",
+              borderRadius: "4px",
+              fontFamily: "monospace",
+              flexDirection: "column",
+              fontSize: "8px",
+              wordBreak: "break-word",
+              border: "1px solid #000",
+              width: "max-content",
+            }}
+          >
+            {equipmentIcon.alt}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

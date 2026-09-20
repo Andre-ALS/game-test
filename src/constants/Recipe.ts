@@ -18,10 +18,17 @@ export enum RecipePrice {
   VERY_HARD = 18,
 }
 
+export function findRecipeById(recipeId: string): Recipe | undefined {
+  return Object.values(BASE_RECIPES)
+    .flat()
+    .find((recipe) => recipe.id === recipeId);
+}
+
 export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
   [RecipeLevel.VERY_EASY]: [
     {
       id: "coffee_black",
+      name: "Café Preto",
       price: RecipePrice[RecipeLevel.VERY_EASY],
       level: RecipeLevel.VERY_EASY,
       steps: [
@@ -44,6 +51,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "iced_tea",
+      name: "Chá Gelado",
       price: RecipePrice[RecipeLevel.VERY_EASY],
       level: RecipeLevel.VERY_EASY,
       steps: [
@@ -74,6 +82,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "lemon_water",
+      name: "Água com Limão",
       price: RecipePrice[RecipeLevel.VERY_EASY],
       level: RecipeLevel.VERY_EASY,
       steps: [
@@ -100,6 +109,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "orange_juice",
+      name: "Suco de Laranja",
       price: RecipePrice[RecipeLevel.VERY_EASY],
       level: RecipeLevel.VERY_EASY,
       steps: [
@@ -122,6 +132,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "espresso",
+      name: "Espresso",
       price: RecipePrice[RecipeLevel.VERY_EASY],
       level: RecipeLevel.VERY_EASY,
       steps: [
@@ -144,6 +155,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "hot_milk",
+      name: "Leite Quente",
       price: RecipePrice[RecipeLevel.VERY_EASY],
       level: RecipeLevel.VERY_EASY,
       steps: [
@@ -165,6 +177,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "hot_chocolate",
+      name: "Chocolate Quente",
       price: RecipePrice[RecipeLevel.VERY_EASY],
       level: RecipeLevel.VERY_EASY,
       steps: [
@@ -186,6 +199,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "lemon_tea",
+      name: "Chá de Limão",
       price: RecipePrice[RecipeLevel.VERY_EASY],
       level: RecipeLevel.VERY_EASY,
       steps: [
@@ -212,6 +226,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "simple_milkshake",
+      name: "Milkshake Simples",
       price: RecipePrice[RecipeLevel.VERY_EASY],
       level: RecipeLevel.VERY_EASY,
       steps: [
@@ -233,6 +248,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "soda_ice",
+      name: "Refrigerante com Gelo",
       price: RecipePrice[RecipeLevel.VERY_EASY],
       level: RecipeLevel.VERY_EASY,
       steps: [
@@ -261,6 +277,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
   [RecipeLevel.EASY]: [
     {
       id: "coffee_milk",
+      name: "Café com Leite",
       price: RecipePrice[RecipeLevel.EASY],
       level: RecipeLevel.EASY,
       steps: [
@@ -287,6 +304,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "honey_tea",
+      name: "Chá com Mel",
       price: RecipePrice[RecipeLevel.EASY],
       level: RecipeLevel.EASY,
       steps: [
@@ -313,6 +331,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "lemonade",
+      name: "Limonada",
       price: RecipePrice[RecipeLevel.EASY],
       level: RecipeLevel.EASY,
       steps: [
@@ -343,6 +362,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "strawberry_juice",
+      name: "Suco de Morango",
       price: RecipePrice[RecipeLevel.EASY],
       level: RecipeLevel.EASY,
       steps: [
@@ -364,6 +384,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "cappuccino",
+      name: "Cappuccino",
       price: RecipePrice[RecipeLevel.EASY],
       level: RecipeLevel.EASY,
       steps: [
@@ -398,6 +419,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "iced_chocolate",
+      name: "Chocolate Gelado",
       price: RecipePrice[RecipeLevel.EASY],
       level: RecipeLevel.EASY,
       steps: [
@@ -432,6 +454,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "vanilla_milkshake",
+      name: "Milkshake de Baunilha",
       price: RecipePrice[RecipeLevel.EASY],
       level: RecipeLevel.EASY,
       steps: [
@@ -457,6 +480,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "strawberry_milkshake",
+      name: "Milkshake de Morango",
       price: RecipePrice[RecipeLevel.EASY],
       level: RecipeLevel.EASY,
       steps: [
@@ -482,6 +506,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "peach_tea",
+      name: "Chá de Pêssego",
       price: RecipePrice[RecipeLevel.EASY],
       level: RecipeLevel.EASY,
       steps: [
@@ -516,6 +541,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "vanilla_coffee",
+      name: "Café com Baunilha",
       price: RecipePrice[RecipeLevel.EASY],
       level: RecipeLevel.EASY,
       steps: [
@@ -548,6 +574,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
   [RecipeLevel.NORMAL]: [
     {
       id: "classic_bubble_tea",
+      name: "Bubble Tea Clássico",
       price: RecipePrice[RecipeLevel.NORMAL],
       level: RecipeLevel.NORMAL,
       steps: [
@@ -586,6 +613,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "strawberry_bubble_tea",
+      name: "Bubble Tea de Morango",
       price: RecipePrice[RecipeLevel.NORMAL],
       level: RecipeLevel.NORMAL,
       steps: [
@@ -624,6 +652,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "creamy_cappuccino",
+      name: "Cappuccino Cremoso",
       price: RecipePrice[RecipeLevel.NORMAL],
       level: RecipeLevel.NORMAL,
       steps: [
@@ -662,6 +691,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "mocha",
+      name: "Mocha",
       price: RecipePrice[RecipeLevel.NORMAL],
       level: RecipeLevel.NORMAL,
       steps: [
@@ -700,6 +730,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "strawberry_smoothie",
+      name: "Smoothie de Morango",
       price: RecipePrice[RecipeLevel.NORMAL],
       level: RecipeLevel.NORMAL,
       steps: [
@@ -729,6 +760,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "banana_smoothie",
+      name: "Smoothie de Banana",
       price: RecipePrice[RecipeLevel.NORMAL],
       level: RecipeLevel.NORMAL,
       steps: [
@@ -758,6 +790,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "crunchy_chocolate",
+      name: "Chocolate Crocante",
       price: RecipePrice[RecipeLevel.NORMAL],
       level: RecipeLevel.NORMAL,
       steps: [
@@ -796,6 +829,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "caramel_coffee",
+      name: "Café com Caramelo",
       price: RecipePrice[RecipeLevel.NORMAL],
       level: RecipeLevel.NORMAL,
       steps: [
@@ -834,6 +868,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "tropical_tea",
+      name: "Chá Tropical",
       price: RecipePrice[RecipeLevel.NORMAL],
       level: RecipeLevel.NORMAL,
       steps: [
@@ -872,6 +907,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "chocolate_milkshake",
+      name: "Milkshake de Chocolate",
       price: RecipePrice[RecipeLevel.NORMAL],
       level: RecipeLevel.NORMAL,
       steps: [
@@ -903,6 +939,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
   [RecipeLevel.HARD]: [
     {
       id: "mango_bubble_tea",
+      name: "Bubble Tea de Manga",
       price: RecipePrice[RecipeLevel.HARD],
       level: RecipeLevel.HARD,
       steps: [
@@ -945,6 +982,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "chocolate_bubble_tea",
+      name: "Bubble Tea de Chocolate",
       price: RecipePrice[RecipeLevel.HARD],
       level: RecipeLevel.HARD,
       steps: [
@@ -987,6 +1025,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "caramel_mocha",
+      name: "Mocha com Caramelo",
       price: RecipePrice[RecipeLevel.HARD],
       level: RecipeLevel.HARD,
       steps: [
@@ -1029,6 +1068,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "vanilla_cappuccino",
+      name: "Cappuccino de Baunilha",
       price: RecipePrice[RecipeLevel.HARD],
       level: RecipeLevel.HARD,
       steps: [
@@ -1071,6 +1111,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "tropical_smoothie",
+      name: "Smoothie Tropical",
       price: RecipePrice[RecipeLevel.HARD],
       level: RecipeLevel.HARD,
       steps: [
@@ -1104,6 +1145,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "oreo_milkshake",
+      name: "Milkshake de Oreo",
       price: RecipePrice[RecipeLevel.HARD],
       level: RecipeLevel.HARD,
       steps: [
@@ -1146,6 +1188,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "special_chocolate",
+      name: "Chocolate Especial",
       price: RecipePrice[RecipeLevel.HARD],
       level: RecipeLevel.HARD,
       steps: [
@@ -1188,6 +1231,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "berry_tea",
+      name: "Chá de Frutas Vermelhas",
       price: RecipePrice[RecipeLevel.HARD],
       level: RecipeLevel.HARD,
       steps: [
@@ -1230,6 +1274,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "coffee_frappe",
+      name: "Café Frappê",
       price: RecipePrice[RecipeLevel.HARD],
       level: RecipeLevel.HARD,
       steps: [
@@ -1272,6 +1317,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "caramel_milkshake",
+      name: "Milkshake de Caramelo",
       price: RecipePrice[RecipeLevel.HARD],
       level: RecipeLevel.HARD,
       steps: [
@@ -1316,6 +1362,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
   [RecipeLevel.VERY_HARD]: [
     {
       id: "supreme_bubble_tea",
+      name: "Bubble Tea Supremo",
       price: RecipePrice[RecipeLevel.VERY_HARD],
       level: RecipeLevel.VERY_HARD,
       steps: [
@@ -1362,6 +1409,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "tropical_supreme_bubble_tea",
+      name: "Bubble Tea Supremo Tropical",
       price: RecipePrice[RecipeLevel.VERY_HARD],
       level: RecipeLevel.VERY_HARD,
       steps: [
@@ -1408,6 +1456,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "caramel_frappe",
+      name: "Frappê de Caramelo",
       price: RecipePrice[RecipeLevel.VERY_HARD],
       level: RecipeLevel.VERY_HARD,
       steps: [
@@ -1454,6 +1503,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "chocolate_frappe",
+      name: "Frappê de Chocolate",
       price: RecipePrice[RecipeLevel.VERY_HARD],
       level: RecipeLevel.VERY_HARD,
       steps: [
@@ -1500,6 +1550,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "supreme_milkshake",
+      name: "Milkshake Supremo",
       price: RecipePrice[RecipeLevel.VERY_HARD],
       level: RecipeLevel.VERY_HARD,
       steps: [
@@ -1546,6 +1597,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "supreme_mocha",
+      name: "Mocha Supremo",
       price: RecipePrice[RecipeLevel.VERY_HARD],
       level: RecipeLevel.VERY_HARD,
       steps: [
@@ -1592,6 +1644,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "energy_smoothie",
+      name: "Smoothie Energético",
       price: RecipePrice[RecipeLevel.VERY_HARD],
       level: RecipeLevel.VERY_HARD,
       steps: [
@@ -1629,6 +1682,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "supreme_chocolate",
+      name: "Chocolate Supremo",
       price: RecipePrice[RecipeLevel.VERY_HARD],
       level: RecipeLevel.VERY_HARD,
       steps: [
@@ -1675,6 +1729,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "berry_bubble_tea",
+      name: "Bubble Tea de Frutas Vermelhas",
       price: RecipePrice[RecipeLevel.VERY_HARD],
       level: RecipeLevel.VERY_HARD,
       steps: [
@@ -1721,6 +1776,7 @@ export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
     },
     {
       id: "house_special_coffee",
+      name: "Café Especial da Casa",
       price: RecipePrice[RecipeLevel.VERY_HARD],
       level: RecipeLevel.VERY_HARD,
       steps: [

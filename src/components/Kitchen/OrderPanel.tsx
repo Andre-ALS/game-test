@@ -2,11 +2,11 @@ import clsx from "clsx";
 
 import styles from "./OrderPanel.module.css";
 
-import { OrderStatus } from "../../constants/Order";
-import { RECIPE_STEPS_ACTION_NAMES } from "../../constants/RecipeSteps";
-import { INGREDIENTS_NAMES } from "../../constants/Ingredients";
-import { EQUIPMENTS_NAMES } from "../../constants/Equipments";
-import { findRecipeById } from "../../constants/Recipe";
+import { OrderStatus } from "../../constants/orders";
+import { RECIPE_STEPS_ACTION_NAMES } from "../../constants/recipeSteps";
+import { INGREDIENTS_NAMES } from "../../constants/ingredients";
+import { EQUIPMENTS_NAMES } from "../../constants/equipments";
+import { findRecipeById } from "../../constants/recipes";
 
 import type { PreparationState } from "../../hooks/usePreparation";
 

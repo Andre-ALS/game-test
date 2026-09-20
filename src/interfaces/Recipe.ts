@@ -1,4 +1,4 @@
-import type { RecipeLevel } from "../constants/Recipe";
+import type { RecipeLevel } from "../constants/recipes";
 import type { RecipeSteps } from "./RecipeSteps";
 
 export interface Recipe {

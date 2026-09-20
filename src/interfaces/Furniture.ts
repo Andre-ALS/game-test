@@ -1,4 +1,4 @@
-import type { Furnitures } from "../constants/Furnitures";
+import type { Furnitures } from "../constants/furnitures";
 
 export interface Furniture {
   id: Furnitures;

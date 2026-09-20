@@ -1,4 +1,4 @@
-import type { Ingredients } from "../constants/Ingredients";
+import type { Ingredients } from "../constants/ingredients";
 
 export interface Ingredient {
   id: Ingredients;

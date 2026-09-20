@@ -1,6 +1,6 @@
-import { Equipments } from "./Equipments";
-import { Ingredients } from "./Ingredients";
-import type { RecipeStepsActions } from "./RecipeSteps";
+import { Equipments } from "./equipments";
+import { Ingredients } from "./ingredients";
+import type { RecipeStepsActions } from "./recipeSteps";
 
 export const INGREDIENT_OPERATIONS: Record<
   Ingredients,

@@ -1,4 +1,4 @@
-import type { OrderStatus } from "../constants/Order";
+import type { OrderStatus } from "../constants/orders";
 
 export interface OrderItem {
   recipeId: string;

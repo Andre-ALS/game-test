@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import type { Position } from "./helpers/player";
-import { TILE_SIZE } from "./constants/ui/tile";
-import { Directions } from "./constants/ui/direction";
-import { GAME_MAP, Tiles, TILE_TO_EQUIPMENT } from "./constants/ui/map";
+import { TILE_SIZE, TILE_TO_EQUIPMENT, Tiles } from "./constants/tile";
+import { Directions } from "./constants/direction";
+import { GAME_MAP } from "./constants/map";
 
 import { usePreparation } from "./hooks/usePreparation";
 

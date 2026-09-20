@@ -1,3 +1,7 @@
+import { BASE_MAP } from "../constants/map";
+import { Tiles } from "../constants/tile";
+import { getTileFootprint } from "./tile";
+
 export interface MapCell {
   x: number;
   y: number;
@@ -133,3 +137,9 @@ export function getTilePlacement(placements: PlacementGrid, x: number, y: number
     }
   );
 }
+
+export const sanitizedMap = (baseMap: Tiles[][] = BASE_MAP) =>
+  sanitizeMap(baseMap, {
+    floor: Tiles.FLOOR,
+    getFootprint: getTileFootprint,
+  });

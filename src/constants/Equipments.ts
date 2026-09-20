@@ -105,7 +105,7 @@ export const EQUIPMENTS_ICONS: Record<
     src: cupStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.CUP_STATION],
     rotations: {
-      horizontal: { width: 70, height: 46, top: -16, left: 6 },
+      horizontal: { width: 80, height: 45, top: -15, left: 0 },
       vertical: { width: 45, height: 86, top: -16, left: -2 },
     },
   },
@@ -113,115 +113,115 @@ export const EQUIPMENTS_ICONS: Record<
     src: coffeeStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.COFFEE_STATION],
     rotations: {
-      single: { width: 45, height: 48, top: -18, left: -2.4 },
+      single: { width: 41, height: 48, top: -18, left: -1 },
     },
   },
   [Equipments.TEA_STATION]: {
     src: teaStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.TEA_STATION],
     rotations: {
-      single: { width: 45, height: 44, top: -14, left: -2.4 },
+      single: { width: 41, height: 44, top: -14, left: -1 },
     },
   },
   [Equipments.WATER_STATION]: {
     src: waterStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.WATER_STATION],
     rotations: {
-      single: { width: 45, height: 52, top: -22, left: -2.4 },
+      single: { width: 41, height: 48, top: -18, left: -1 },
     },
   },
   [Equipments.MILK_STATION]: {
     src: milkStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.MILK_STATION],
     rotations: {
-      single: { width: 45, height: 48, top: -18, left: -2.4 },
+      single: { width: 41, height: 48, top: -18, left: -1 },
     },
   },
   [Equipments.SODA_STATION]: {
     src: sodaStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.SODA_STATION],
     rotations: {
-      single: { width: 45, height: 48, top: -18, left: -2.4 },
+      single: { width: 41, height: 48, top: -18, left: -1 },
     },
   },
   [Equipments.JUICE_STATION]: {
     src: juiceStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.JUICE_STATION],
     rotations: {
-      single: { width: 45, height: 48, top: -18, left: -2.4 },
+      single: { width: 41, height: 48, top: -18, left: -1 },
     },
   },
   [Equipments.CHOCOLATE_STATION]: {
     src: chocolateStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.CHOCOLATE_STATION],
     rotations: {
-      single: { width: 45, height: 45, top: -15, left: -2.4 },
+      single: { width: 41, height: 48, top: -18, left: -1 },
     },
   },
   [Equipments.ICE_STATION]: {
     src: iceStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.ICE_STATION],
     rotations: {
-      single: { width: 45, height: 36, top: -6, left: -2.4 },
+      single: { width: 40, height: 34, top: -4, left: 0 },
     },
   },
   [Equipments.PREPARATION_STATION]: {
     src: preparationStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.PREPARATION_STATION],
     rotations: {
-      horizontal: { width: 70, height: 46, top: -16, left: 6 },
-      vertical: { width: 45, height: 90, top: -16, left: -2 },
+      horizontal: { width: 82, height: 42, top: -12, left: -2 },
+      vertical: { width: 45, height: 86, top: -16, left: -2 },
     },
   },
   [Equipments.MIXER]: {
     src: mixerIcon,
     alt: EQUIPMENTS_NAMES[Equipments.MIXER],
     rotations: {
-      single: { width: 45, height: 46, top: -16, left: -2.4 },
+      single: { width: 41, height: 48, top: -18, left: -1 },
     },
   },
   [Equipments.BLENDER]: {
     src: blenderIcon,
     alt: EQUIPMENTS_NAMES[Equipments.BLENDER],
     rotations: {
-      single: { width: 45, height: 50, top: -20, left: -2.4 },
+      single: { width: 41, height: 48, top: -18, left: -1 },
     },
   },
   [Equipments.HEATING_STATION]: {
     src: heatingStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.HEATING_STATION],
     rotations: {
-      single: { width: 45, height: 40, top: -10, left: -2.4 },
+      single: { width: 41, height: 40, top: -10, left: -1 },
     },
   },
   [Equipments.TOPPING_STATION]: {
     src: toppingStationIcon,
     alt: EQUIPMENTS_NAMES[Equipments.TOPPING_STATION],
     rotations: {
-      horizontal: { width: 84, height: 38, top: -8, left: -2.4 },
-      vertical: { width: 45, height: 79, top: -8, left: -2.4 },
+      horizontal: { width: 80, height: 38, top: -8, left: 0 },
+      vertical: { width: 45, height: 86, top: -16, left: -2 },
     },
   },
   [Equipments.CUP_SEALER]: {
     src: cupSealerIcon,
     alt: EQUIPMENTS_NAMES[Equipments.CUP_SEALER],
     rotations: {
-      single: { width: 45, height: 46, top: -16, left: -2.4 },
+      single: { width: 41, height: 48, top: -18, left: -1 },
     },
   },
   [Equipments.SERVING_COUNTER]: {
     src: servingCounterIcon,
     alt: EQUIPMENTS_NAMES[Equipments.SERVING_COUNTER],
     rotations: {
-      horizontal: { width: 80, height: 46, top: -16, left: -0.4 },
-      vertical: { width: 44, height: 86, top: -16, left: -2 },
+      horizontal: { width: 82, height: 45, top: -15, left: -2 },
+      vertical: { width: 45, height: 86, top: -16, left: -2 },
     },
   },
   [Equipments.TRASH_BIN]: {
     src: trashBinIcon,
     alt: EQUIPMENTS_NAMES[Equipments.TRASH_BIN],
     rotations: {
-      single: { width: 36, height: 40, top: -10, left: 2 },
+      single: { width: 38, height: 42, top: -12, left: 0.5 },
     },
   },
 };

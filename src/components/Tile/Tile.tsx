@@ -2,17 +2,12 @@ import clsx from "clsx";
 
 import styles from "./Tile.module.css";
 
-import { EQUIPMENTS_ICONS } from "../../constants/Equipments";
-import {
-  GAME_MAP,
-  GAME_MAP_PLACEMENTS,
-  TILE_COLORS,
-  TILE_TO_EQUIPMENT,
-  Tiles,
-} from "../../constants/ui/map";
+import { EQUIPMENTS_ICONS } from "../../constants/equipments";
+import { GAME_MAP, GAME_MAP_PLACEMENTS } from "../../constants/map";
 import { getTilePlacement } from "../../helpers/map";
 
 import groundImage from "../../assets/ground-2.png";
+import { TILE_COLORS, TILE_TO_EQUIPMENT, type Tiles } from "../../constants/tile";
 
 interface TileProps {
   x: number;
@@ -77,7 +72,7 @@ const Tile = ({ x, y, tile }: TileProps) => {
               }}
             />
           </div>
-          <div
+          {/* <div
             style={{
               position: "absolute",
               top: "20px",
@@ -95,7 +90,7 @@ const Tile = ({ x, y, tile }: TileProps) => {
             }}
           >
             {equipmentIcon.alt}
-          </div>
+          </div> */}
         </div>
       )}
     </div>

@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import { findRecipeById } from "../constants/Recipe";
-import { OrderStatus } from "../constants/Order";
-import { Equipments } from "../constants/Equipments";
-import { EQUIPMENT_CATALOG } from "../constants/EquipmentCatalog";
-import { INGREDIENT_OPERATIONS } from "../constants/IngredientOperations";
-import { Ingredients } from "../constants/Ingredients";
-import { RecipeStepsActions } from "../constants/RecipeSteps";
+import { findRecipeById } from "../constants/recipes";
+import { OrderStatus } from "../constants/orders";
+import { Equipments } from "../constants/equipments";
+import { EQUIPMENT_CATALOG } from "../constants/equipmentCatalog";
+import { INGREDIENT_OPERATIONS } from "../constants/ingredientOperations";
+import { Ingredients } from "../constants/ingredients";
+import { RecipeStepsActions } from "../constants/recipeSteps";
 
 import type { Order, OrderItem } from "../interfaces/Order";
 import type { Recipe } from "../interfaces/Recipe";

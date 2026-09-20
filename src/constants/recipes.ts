@@ -1,6 +1,6 @@
-import { Ingredients } from "./Ingredients";
+import { Ingredients } from "./ingredients";
 import { type Recipe } from "../interfaces/Recipe";
-import { RecipeStepsActions } from "./RecipeSteps";
+import { RecipeStepsActions } from "./recipeSteps";
 
 export enum RecipeLevel {
   VERY_EASY = "VERY_EASY",

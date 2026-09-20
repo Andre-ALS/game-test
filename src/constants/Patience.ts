@@ -1,4 +1,4 @@
-import { CustomerType } from "./Customer";
+import { CustomerType } from "./customers";
 
 // patience decay will be the following values per second for each customer type
 export const PATIENCE_DECAY: Record<CustomerType, number> = {

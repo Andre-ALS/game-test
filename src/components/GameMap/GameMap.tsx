@@ -1,7 +1,7 @@
 import styles from "./GameMap.module.css";
 
-import { GAME_MAP } from "../../constants/ui/map";
-import { TILE_SIZE } from "../../constants/ui/tile";
+import { GAME_MAP } from "../../constants/map";
+import { TILE_SIZE } from "../../constants/tile";
 
 interface GameMapProps {
   children: React.ReactNode;

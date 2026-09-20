@@ -1,4 +1,4 @@
-import type { CustomerStatus, CustomerType } from "../constants/Customer";
+import type { CustomerStatus, CustomerType } from "../constants/customers";
 
 export interface CustomerProfile {
   patienceSoft: number;

@@ -1,6 +1,6 @@
-import type { Equipments } from "../constants/Equipments";
-import type { Furnitures } from "../constants/Furnitures";
-import type { Ingredients } from "../constants/Ingredients";
+import type { Equipments } from "../constants/equipments";
+import type { Furnitures } from "../constants/furnitures";
+import type { Ingredients } from "../constants/ingredients";
 
 export interface PlayerProgress {
   money: number;

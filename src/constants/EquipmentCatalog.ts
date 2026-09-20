@@ -1,5 +1,5 @@
-import { Equipments } from "./Equipments";
-import { RecipeStepsActions } from "./RecipeSteps";
+import { Equipments } from "./equipments";
+import { RecipeStepsActions } from "./recipeSteps";
 import type { Equipment } from "../interfaces/Equipment";
 
 export const EQUIPMENT_CATALOG: Record<Equipments, Equipment> = {

@@ -1,5 +1,5 @@
-import type { Ingredients } from "../constants/Ingredients";
-import type { RecipeStepsActions } from "../constants/RecipeSteps";
+import type { Ingredients } from "../constants/ingredients";
+import type { RecipeStepsActions } from "../constants/recipeSteps";
 
 export interface RecipeSteps {
   action: RecipeStepsActions;

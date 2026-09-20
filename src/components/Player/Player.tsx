@@ -6,9 +6,9 @@ import styles from "./Player.module.css";
 import { getFirstFreePosition, type Position } from "../../helpers/player";
 
 import spriteSheet from "../../assets/sprites/player.png";
-import { Directions } from "../../constants/ui/direction";
-import { FRAME_INTERVAL } from "../../constants/ui/frame";
-import { PLAYER_SIZE } from "../../constants/ui/player";
+import { Directions } from "../../constants/direction";
+import { FRAME_INTERVAL } from "../../constants/frame";
+import { PLAYER_SIZE } from "../../constants/player";
 
 interface PlayerProps {
   map: (number | null)[][];

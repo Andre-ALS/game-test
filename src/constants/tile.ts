@@ -28,7 +28,7 @@ export enum Tiles {
 export const TILE_COLORS: Record<Tiles, string> = {
   [Tiles.NONE]: "transparent",
   [Tiles.FLOOR]: "#000000",
-  [Tiles.WALL]: "#808080",
+  [Tiles.WALL]: "transparent",
   [Tiles.PREPARATION_STATION]: "#c2410c",
   [Tiles.MIXER]: "#9333ea",
   [Tiles.BLENDER]: "#2563eb",

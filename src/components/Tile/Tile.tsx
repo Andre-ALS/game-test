@@ -5,9 +5,12 @@ import styles from "./Tile.module.css";
 import { EQUIPMENTS_ICONS } from "../../constants/equipments";
 import { GAME_MAP, GAME_MAP_PLACEMENTS } from "../../constants/map";
 import { getTilePlacement } from "../../helpers/map";
+import { getWallVariant, wallShowsFloorBehind } from "../../helpers/wall";
+import WallView from "../Wall/WallView";
 
 import groundImage from "../../assets/ground-2.png";
-import { TILE_COLORS, TILE_TO_EQUIPMENT, type Tiles } from "../../constants/tile";
+
+import { TILE_COLORS, TILE_SIZE, TILE_TO_EQUIPMENT, Tiles } from "../../constants/tile";
 
 interface TileProps {
   x: number;
@@ -24,6 +27,11 @@ const Tile = ({ x, y, tile }: TileProps) => {
   const equipmentRotation = equipmentIcon?.rotations[placement.orientation];
   const boxWidth = equipmentRotation ? equipmentRotation.width : 0;
   const boxHeight = equipmentRotation ? equipmentRotation.height : 0;
+  const wall = tile === Tiles.WALL ? getWallVariant(GAME_MAP, x, y) : null;
+  const showFloor =
+    tile === Tiles.FLOOR ||
+    Boolean(facingEquipment) ||
+    (wall !== null && wallShowsFloorBehind(wall, GAME_MAP, x, y));
 
   return (
     <div
@@ -34,11 +42,13 @@ const Tile = ({ x, y, tile }: TileProps) => {
           gridColumn: x + 1,
           gridRow: y + 1,
           "--tile-color": `${TILE_COLORS[tile ?? -1]}`,
-          "--background-image": tile === 0 || facingEquipment ? `url(${groundImage})` : "none",
+          "--background-image": showFloor ? `url(${groundImage})` : "none",
           position: "relative",
         } as React.CSSProperties
       }
     >
+      {wall && <WallView size={TILE_SIZE} zIndex={y + 1} wall={wall} />}
+
       {equipmentIcon && equipmentRotation && (
         <div
           style={{

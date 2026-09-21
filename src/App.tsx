@@ -46,7 +46,7 @@ const App = () => {
 
   return (
     <>
-      <div
+      {/* <div
         style={{
           position: "absolute",
           top: "12px",
@@ -66,9 +66,9 @@ const App = () => {
             <div key={index}>{text}</div>
           ),
         )}
-      </div>
+      </div> */}
 
-      <OrderPanel preparation={preparation} />
+      {/* <OrderPanel preparation={preparation} /> */}
 
       <GameMap>
         {GAME_MAP.map((row, y) =>

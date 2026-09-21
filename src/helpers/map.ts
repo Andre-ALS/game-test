@@ -73,11 +73,8 @@ function assignStrip(
   });
 }
 
-/**
- * Claims items using EQUIPMENT_FOOTPRINT (or any getFootprint).
- * Scan is top→bottom, left→right. Multi-tile strips prefer horizontal, then vertical.
- * Incomplete leftover cells become `floor`.
- */
+// Scans top->bottom, left->right; multi-tile strips prefer horizontal then
+// vertical; unmatched cells become `floor`.
 export function sanitizeMap<T extends number>(
   raw: MapGrid<T>,
   { floor, getFootprint }: SanitizeMapOptions<T>,
@@ -93,6 +90,7 @@ export function sanitizeMap<T extends number>(
       }
 
       const tile = map[y][x];
+
       const footprint = getFootprint(tile);
 
       if (footprint === undefined) {

@@ -27,11 +27,11 @@ const Tile = ({ x, y, tile }: TileProps) => {
   const equipmentRotation = equipmentIcon?.rotations[placement.orientation];
   const boxWidth = equipmentRotation ? equipmentRotation.width : 0;
   const boxHeight = equipmentRotation ? equipmentRotation.height : 0;
-  const wall = tile === Tiles.WALL ? getWallVariant(GAME_MAP, x, y) : null;
+  const walls = tile === Tiles.WALL ? getWallVariant(GAME_MAP, x, y) : null;
   const showFloor =
     tile === Tiles.FLOOR ||
     Boolean(facingEquipment) ||
-    (wall !== null && wallShowsFloorBehind(wall, GAME_MAP, x, y));
+    (walls !== null && wallShowsFloorBehind(walls, GAME_MAP, x, y));
 
   return (
     <div
@@ -47,7 +47,24 @@ const Tile = ({ x, y, tile }: TileProps) => {
         } as React.CSSProperties
       }
     >
-      {wall && <WallView size={TILE_SIZE} zIndex={y + 1} wall={wall} />}
+      {/* <div
+        style={{
+          fontFamily: "monospace",
+          fontSize: "8px",
+          backgroundColor: "white",
+          width: "fit-content",
+          zIndex: 99999,
+          position: "absolute",
+          top: 15,
+          left: 15,
+        }}
+      >
+        {JSON.stringify(x)},{JSON.stringify(y)}
+      </div> */}
+
+      {walls?.map((wall, index) => (
+        <WallView key={index} size={TILE_SIZE} zIndex={y + 1} wall={wall} />
+      ))}
 
       {equipmentIcon && equipmentRotation && (
         <div

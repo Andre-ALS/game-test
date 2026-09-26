@@ -9,8 +9,8 @@ import { getWallPieces } from "../../helpers/wall";
 
 import groundImage from "../../assets/ground.png";
 
-import WallView from "../Wall/WallView";
-import EquipmentView from "../Equipment/EquipmentView";
+import WallView from "../WallView/WallView";
+import EquipmentView from "../EquipmentView/EquipmentView";
 
 interface TileProps {
   x: number;
@@ -21,8 +21,7 @@ interface TileProps {
 const Tile = ({ x, y, tile }: TileProps) => {
   const equipment = TILE_TO_EQUIPMENT[tile];
   const placement = getTilePlacement(GAME_MAP_PLACEMENTS, x, y);
-  const equipmentIcon =
-    equipment && placement.isAnchor ? EQUIPMENT_ICONS[equipment] : null;
+  const equipmentIcon = equipment && placement.isAnchor ? EQUIPMENT_ICONS[equipment] : null;
   const walls = tile === Tiles.WALL ? getWallPieces(GAME_MAP, x, y) : null;
   const showFloor = tile === Tiles.FLOOR || Boolean(equipment);
 
@@ -44,11 +43,7 @@ const Tile = ({ x, y, tile }: TileProps) => {
       ))}
 
       {equipmentIcon && (
-        <EquipmentView
-          equipment={equipmentIcon}
-          orientation={placement.orientation}
-          yIndex={y}
-        />
+        <EquipmentView equipment={equipmentIcon} orientation={placement.orientation} yIndex={y} />
       )}
     </div>
   );

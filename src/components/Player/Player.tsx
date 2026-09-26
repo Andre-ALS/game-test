@@ -3,7 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import SpriteAnimation from "../SpriteAnimation/SpriteAnimation";
 import styles from "./Player.module.css";
 
-import { getFirstFreePosition, type Position } from "../../helpers/player";
+import { getFirstFreePosition } from "../../helpers/player";
+
+import type { Position } from "../../interfaces/Position";
 
 import spriteSheet from "../../assets/sprites/player.png";
 import { Directions } from "../../constants/direction";

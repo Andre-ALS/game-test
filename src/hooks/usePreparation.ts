@@ -1,96 +1,22 @@
 import { useState } from "react";
 
-import { findRecipeById } from "../constants/recipes";
-import { OrderStatus } from "../constants/orders";
 import { Equipments } from "../constants/equipments";
-import { EQUIPMENT_CATALOG } from "../constants/equipmentCatalog";
-import { INGREDIENT_OPERATIONS } from "../constants/ingredientOperations";
-import { Ingredients } from "../constants/ingredients";
-import { RecipeStepsActions } from "../constants/recipeSteps";
+import { OrderStatus } from "../constants/orders";
 
 import type { Order, OrderItem } from "../interfaces/Order";
 import type { Recipe } from "../interfaces/Recipe";
 import type { RecipeSteps } from "../interfaces/RecipeSteps";
 
-const ORDER_RECIPE_IDS = ["coffee_black", "iced_tea"];
-
-function createInitialOrder(): Order {
-  return {
-    id: "order-1",
-    customerId: "customer-1",
-    restaurantId: "restaurant-1",
-    tip: 0,
-    items: ORDER_RECIPE_IDS.map((recipeId) => ({
-      recipeId,
-      status: OrderStatus.WAITING,
-    })),
-    createdAt: Date.now(),
-  };
-}
-
-function isEquipmentValidForStep(equipmentId: Equipments, step: RecipeSteps): boolean {
-  if (step.ingredient) {
-    const allowedEquipments = INGREDIENT_OPERATIONS[step.ingredient]?.[step.action];
-
-    if (allowedEquipments) {
-      return allowedEquipments.includes(equipmentId);
-    }
-  }
-
-  return EQUIPMENT_CATALOG[equipmentId].actions.includes(step.action);
-}
-
-interface StepGroups {
-  cupStep?: RecipeSteps;
-  closeStep?: RecipeSteps;
-  middleSteps: RecipeSteps[];
-}
-
-function getStepGroups(recipe: Recipe | undefined): StepGroups {
-  if (!recipe) {
-    return { middleSteps: [] };
-  }
-
-  const nonServeSteps = recipe.steps.filter((step) => step.action !== RecipeStepsActions.SERVE);
-  const cupStepIndex = nonServeSteps.findIndex((step) => step.ingredient === Ingredients.CUP);
-  const closeStepIndex = nonServeSteps.findIndex(
-    (step) => step.action === RecipeStepsActions.CLOSE,
-  );
-
-  return {
-    cupStep: cupStepIndex !== -1 ? nonServeSteps[cupStepIndex] : undefined,
-    closeStep: closeStepIndex !== -1 ? nonServeSteps[closeStepIndex] : undefined,
-    middleSteps: nonServeSteps.filter(
-      (_, index) => index !== cupStepIndex && index !== closeStepIndex,
-    ),
-  };
-}
-
-interface ItemProgress {
-  cupTaken: boolean;
-  closeDone: boolean;
-  remainingMiddleSteps: RecipeSteps[];
-  wrongEquipments: Equipments[];
-}
-
-function createItemProgress(recipe: Recipe | undefined): ItemProgress {
-  const { cupStep, closeStep, middleSteps } = getStepGroups(recipe);
-
-  return {
-    cupTaken: !cupStep,
-    closeDone: !closeStep,
-    remainingMiddleSteps: middleSteps,
-    wrongEquipments: [],
-  };
-}
-
-function addWrongEquipment(current: ItemProgress, equipmentId: Equipments): ItemProgress {
-  if (current.wrongEquipments.includes(equipmentId)) {
-    return current;
-  }
-
-  return { ...current, wrongEquipments: [...current.wrongEquipments, equipmentId] };
-}
+import {
+  applyEquipmentInteraction,
+  createInitialOrder,
+  createItemProgress,
+  getRecipeForItem,
+  getStepGroups,
+  markItemStatus,
+  resolveServeStatus,
+  type ItemProgress,
+} from "../helpers/preparation";
 
 export interface PreparationState {
   order: Order;
@@ -112,7 +38,7 @@ export function usePreparation(): PreparationState {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
 
   const activeItem = order.items[activeItemIndex];
-  const activeRecipe = activeItem ? findRecipeById(activeItem.recipeId) : undefined;
+  const activeRecipe = getRecipeForItem(order, activeItemIndex);
 
   const [progress, setProgress] = useState<ItemProgress>(() => createItemProgress(activeRecipe));
 
@@ -122,15 +48,9 @@ export function usePreparation(): PreparationState {
 
   const advanceToNextItem = (status: OrderStatus) => {
     const nextIndex = activeItemIndex + 1;
-    const nextRecipe = findRecipeById(order.items[nextIndex]?.recipeId ?? "");
+    const nextRecipe = getRecipeForItem(order, nextIndex);
 
-    setOrder((current) => ({
-      ...current,
-      items: current.items.map((item, index) =>
-        index === activeItemIndex ? { ...item, status } : item,
-      ),
-    }));
-
+    setOrder((current) => markItemStatus(current, activeItemIndex, status));
     setActiveItemIndex(nextIndex);
     setProgress(createItemProgress(nextRecipe));
   };
@@ -150,59 +70,13 @@ export function usePreparation(): PreparationState {
         return;
       }
 
-      const isFullyDone = progress.remainingMiddleSteps.length === 0 && progress.closeDone;
-
-      let status = OrderStatus.COMPLETED;
-
-      if (progress.wrongEquipments.length > 0) {
-        status = OrderStatus.FAILED;
-      } else if (!isFullyDone) {
-        status = OrderStatus.INCOMPLETE;
-      }
-
-      advanceToNextItem(status);
+      advanceToNextItem(resolveServeStatus(progress));
       return;
     }
 
-    setProgress((current) => {
-      if (!current.cupTaken) {
-        if (stepGroups.cupStep && isEquipmentValidForStep(equipmentId, stepGroups.cupStep)) {
-          return { ...current, cupTaken: true };
-        }
-
-        return current;
-      }
-
-      const middleStepsPending = current.remainingMiddleSteps.length > 0;
-
-      if (
-        closeRequired &&
-        stepGroups.closeStep &&
-        isEquipmentValidForStep(equipmentId, stepGroups.closeStep)
-      ) {
-        if (current.closeDone) {
-          return addWrongEquipment(current, equipmentId);
-        }
-
-        if (middleStepsPending) {
-          return current;
-        }
-
-        return { ...current, closeDone: true };
-      }
-
-      const matchIndex = current.remainingMiddleSteps.findIndex((step) =>
-        isEquipmentValidForStep(equipmentId, step),
-      );
-
-      if (matchIndex !== -1) {
-        const nextRemaining = [...current.remainingMiddleSteps];
-        nextRemaining.splice(matchIndex, 1);
-        return { ...current, remainingMiddleSteps: nextRemaining };
-      }
-
-      return addWrongEquipment(current, equipmentId);
-    });
+    setProgress((current) =>
+      applyEquipmentInteraction(current, equipmentId, stepGroups, closeRequired),
+    );
   };
 
   return {

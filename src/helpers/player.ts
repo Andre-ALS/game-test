@@ -1,7 +1,6 @@
-export interface Position {
-  x: number;
-  y: number;
-}
+import type { Position } from "../interfaces/Position";
+
+export type { Position };
 
 export function getFirstFreePosition(
   playerShape: Position[],

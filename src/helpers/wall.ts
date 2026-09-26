@@ -1,17 +1,8 @@
 import { Tiles } from "../constants/tile";
+import { WALL_CORNER_RADIUS } from "../constants/walls";
+import type { WallAlign, WallDraw } from "../interfaces/Wall";
 
-export type WallAlign = "left" | "right" | "full";
-
-export interface WallDraw {
-  kind: "cap" | "face";
-  openNorth: boolean;
-  openEast: boolean;
-  openWest: boolean;
-  align: WallAlign;
-  darker?: boolean;
-  /** Which top corner of the strip to round. Defaults from align (outer corners). */
-  roundTop?: "left" | "right";
-}
+export type { WallAlign, WallDraw };
 
 function isWallAt(map: Tiles[][], x: number, y: number): boolean {
   return map[y]?.[x] === Tiles.WALL;
@@ -233,4 +224,46 @@ export function getWallPieces(map: Tiles[][], x: number, y: number): WallDraw[] 
       align,
     },
   ];
+}
+
+// View layout helpers
+
+export function stripLayout(size: number, align: WallAlign): { left: number; width: number } {
+  if (align === "full") {
+    return { left: 0, width: size };
+  }
+
+  const width = size / 2;
+
+  return {
+    left: align === "right" ? width : 0,
+    width,
+  };
+}
+
+export function drawCapRadius(wall: WallDraw): string {
+  if (wall.align === "full") {
+    return [
+      wall.openNorth && wall.openWest ? WALL_CORNER_RADIUS : "0",
+      wall.openNorth && wall.openEast ? WALL_CORNER_RADIUS : "0",
+      "0",
+      "0",
+    ].join(" ");
+  }
+
+  if (!wall.openNorth) {
+    return "0";
+  }
+
+  const roundLeft =
+    wall.roundTop === "left" || (wall.roundTop === undefined && wall.align === "right");
+  const roundRight =
+    wall.roundTop === "right" || (wall.roundTop === undefined && wall.align === "left");
+
+  return [
+    roundLeft ? WALL_CORNER_RADIUS : "0",
+    roundRight ? WALL_CORNER_RADIUS : "0",
+    "0",
+    "0",
+  ].join(" ");
 }

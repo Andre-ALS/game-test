@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-import type { Position } from "./helpers/player";
+import type { Position } from "./interfaces/Position";
+
 import { TILE_SIZE, TILE_TO_EQUIPMENT, Tiles } from "./constants/tile";
 import { Directions } from "./constants/direction";
 import { GAME_MAP } from "./constants/map";

@@ -1,31 +1,20 @@
 import { BASE_MAP } from "../constants/map";
 import { Tiles } from "../constants/tile";
+import type {
+  MapCell,
+  MapGrid,
+  PlacementGrid,
+  PlacementOrientation,
+  SanitizedMap,
+  TilePlacement,
+} from "../interfaces/Map";
 import { getTileFootprint } from "./tile";
 
-export interface MapCell {
-  x: number;
-  y: number;
-}
-
-export type MapGrid<T extends number> = T[][];
-
-export type PlacementOrientation = "horizontal" | "vertical" | "single";
-
-export interface TilePlacement {
-  isAnchor: boolean;
-  orientation: PlacementOrientation;
-}
-
-export type PlacementGrid = (TilePlacement | null)[][];
+export type { MapCell, MapGrid, PlacementGrid, PlacementOrientation, SanitizedMap, TilePlacement };
 
 interface SanitizeMapOptions<T extends number> {
   floor: T;
   getFootprint: (tile: T) => number | undefined;
-}
-
-export interface SanitizedMap<T extends number> {
-  map: MapGrid<T>;
-  placements: PlacementGrid;
 }
 
 function cloneMap<T extends number>(map: MapGrid<T>): MapGrid<T> {
@@ -73,8 +62,6 @@ function assignStrip(
   });
 }
 
-// Scans top->bottom, left->right; multi-tile strips prefer horizontal then
-// vertical; unmatched cells become `floor`.
 export function sanitizeMap<T extends number>(
   raw: MapGrid<T>,
   { floor, getFootprint }: SanitizeMapOptions<T>,
@@ -90,7 +77,6 @@ export function sanitizeMap<T extends number>(
       }
 
       const tile = map[y][x];
-
       const footprint = getFootprint(tile);
 
       if (footprint === undefined) {

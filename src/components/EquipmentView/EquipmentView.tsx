@@ -1,4 +1,4 @@
-import type { PlacementOrientation } from "../../helpers/map";
+import type { PlacementOrientation } from "../../interfaces/Map";
 import type { EquipmentImageProperties } from "../../interfaces/Equipment";
 
 interface EquipmentViewProps {

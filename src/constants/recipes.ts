@@ -18,12 +18,6 @@ export enum RecipePrice {
   VERY_HARD = 18,
 }
 
-export function findRecipeById(recipeId: string): Recipe | undefined {
-  return Object.values(BASE_RECIPES)
-    .flat()
-    .find((recipe) => recipe.id === recipeId);
-}
-
 export const BASE_RECIPES: Record<RecipeLevel, Recipe[]> = {
   [RecipeLevel.VERY_EASY]: [
     {

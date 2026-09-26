@@ -2,29 +2,17 @@ import clsx from "clsx";
 
 import styles from "./OrderPanel.module.css";
 
-import { OrderStatus } from "../../constants/orders";
 import { RECIPE_STEPS_ACTION_NAMES } from "../../constants/recipeSteps";
 import { INGREDIENTS_NAMES } from "../../constants/ingredients";
 import { EQUIPMENT_NAMES } from "../../constants/equipments";
-import { findRecipeById } from "../../constants/recipes";
+import { ORDER_FINISHED_STATUSES, ORDER_STATUS_ICON } from "../../constants/orders";
 
 import type { PreparationState } from "../../hooks/usePreparation";
+import { findRecipeById } from "../../helpers/recipe";
 
 interface OrderPanelProps {
   preparation: PreparationState;
 }
-
-const ITEM_STATUS_ICON: Record<OrderStatus, string> = {
-  [OrderStatus.CREATED]: "⏳",
-  [OrderStatus.WAITING]: "⏳",
-  [OrderStatus.IN_PROGRESS]: "👉",
-  [OrderStatus.READY]: "👉",
-  [OrderStatus.COMPLETED]: "✅",
-  [OrderStatus.INCOMPLETE]: "⚠️",
-  [OrderStatus.FAILED]: "❌",
-};
-
-const FINISHED_STATUSES = [OrderStatus.COMPLETED, OrderStatus.INCOMPLETE, OrderStatus.FAILED];
 
 const OrderPanel = ({ preparation }: OrderPanelProps) => {
   const {
@@ -45,9 +33,9 @@ const OrderPanel = ({ preparation }: OrderPanelProps) => {
 
       <div className={styles.items}>
         {order.items.map((item, index) => {
-          const isFinished = FINISHED_STATUSES.includes(item.status);
+          const isFinished = ORDER_FINISHED_STATUSES.includes(item.status);
           const isActive = !isFinished && index === activeItemIndex;
-          const icon = isActive ? "👉" : ITEM_STATUS_ICON[item.status];
+          const icon = isActive ? "👉" : ORDER_STATUS_ICON[item.status];
           const recipeName = findRecipeById(item.recipeId)?.name ?? item.recipeId;
 
           return (

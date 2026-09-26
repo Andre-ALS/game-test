@@ -57,16 +57,18 @@ src/
 │   ├── SpriteAnimation/
 │   ├── Tile/
 │   └── Wall/
-├── helpers/                # map sanitize, walls, player spawn
-├── hooks/usePreparation.ts # Order / station interaction logic
-├── interfaces/             # Domain models (kept for future wiring)
-└── constants/              # Tiles, equipment, recipes, layout…
+├── helpers/                # Pure logic (map, walls, recipe, preparation, player)
+├── hooks/usePreparation.ts # Thin React wiring over preparation helpers
+├── interfaces/             # Types only (domain + Position/Map/Wall)
+└── constants/              # Enums + static data
 ```
 
 ### Runtime vs domain
 
 1. **Runtime (live):** map, walls, player, station sprites, space interact, order panel + `usePreparation`.
 2. **Domain stubs:** customers, furniture, patience, inventory, restaurant layout types — kept for the Tasty Chef MVP path; not all wired to UI yet.
+
+**Testability:** put pure functions in `helpers/` (e.g. `preparation.ts`, `wall.ts`, `map.ts`); keep components/hooks thin.
 
 ---
 

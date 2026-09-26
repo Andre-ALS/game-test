@@ -9,6 +9,7 @@ import spriteSheet from "../../assets/sprites/player.png";
 import { Directions } from "../../constants/direction";
 import { FRAME_INTERVAL } from "../../constants/frame";
 import { PLAYER_SIZE } from "../../constants/player";
+import { OBJ_TILE_BOTTOM_OFFSET } from "../../constants/tile";
 
 interface PlayerProps {
   map: (number | null)[][];
@@ -195,6 +196,7 @@ const Player = ({ map, tileSize, onMoveCallback }: PlayerProps) => {
           "--tile-size": `${tileSize}px`,
           "--player-x": startPosition.x,
           "--player-y": startPosition.y,
+          "--obj-tile-bottom-offset": `${OBJ_TILE_BOTTOM_OFFSET}px`,
         } as React.CSSProperties
       }
     >
@@ -204,7 +206,7 @@ const Player = ({ map, tileSize, onMoveCallback }: PlayerProps) => {
         rows={12}
         row={DIRECTION_ROWS[direction]}
         frameCount={5}
-        width={PLAYER_SIZE}
+        width={PLAYER_SIZE - 2}
         height={PLAYER_SIZE}
         frameInterval={FRAME_INTERVAL}
         action="hold"

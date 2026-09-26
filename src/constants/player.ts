@@ -1,1 +1,1 @@
-export const PLAYER_SIZE = 48;
+export const PLAYER_SIZE = 42;

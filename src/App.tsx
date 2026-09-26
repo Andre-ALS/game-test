@@ -99,7 +99,7 @@ const App = () => {
         />
       </GameMap>
 
-      <DirectionalButtons />
+      {/* <DirectionalButtons /> */}
     </>
   );
 };

@@ -47,10 +47,7 @@ function getStripeDirection(direction: string): string {
   return direction === "to bottom" || direction === "to top" ? "to right" : "to bottom";
 }
 
-export function getWallEdgeBackground(
-  direction: string,
-  darker = false,
-): { background: string } {
+export function getWallEdgeBackground(direction: string, darker = false): { background: string } {
   const bands = getWallBandStops(darker);
   const capBand = bands[0];
   const baseBand = bands[bands.length - 1];
@@ -62,4 +59,3 @@ export function getWallEdgeBackground(
     background: `${capMask}, ${baseMask}, ${stripe}, ${getWallGradient(direction, darker)}`,
   };
 }
-

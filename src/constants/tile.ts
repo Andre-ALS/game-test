@@ -1,6 +1,6 @@
 import { Equipments } from "./equipments";
 
-export const TILE_SIZE = 40;
+export { TILE_SIZE, OBJ_TILE_BOTTOM_OFFSET } from "./layout";
 
 export enum Tiles {
   NONE = -1,

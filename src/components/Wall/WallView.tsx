@@ -6,6 +6,7 @@ interface WallViewProps {
   size: number;
   zIndex: number;
   wall: WallDraw;
+  bottomOffset?: number;
 }
 
 function stripLayout(size: number, align: WallAlign): { left: number; width: number } {
@@ -21,7 +22,7 @@ function stripLayout(size: number, align: WallAlign): { left: number; width: num
   };
 }
 
-function capRadius(wall: Extract<WallDraw, { kind: "cap" }>): string {
+function drawCapRadius(wall: WallDraw): string {
   if (wall.align === "full") {
     return [
       wall.openNorth && wall.openWest ? WALL_CORNER_RADIUS : "0",
@@ -51,25 +52,21 @@ function capRadius(wall: Extract<WallDraw, { kind: "cap" }>): string {
 
 const WallView = ({ size, zIndex, wall }: WallViewProps) => {
   const { left, width } = stripLayout(size, wall.align);
+  // Lift the wall for the tall face, but keep the bottom flush with the tile so
+  // no transparent gap opens on the south edge.
+  const height = size + 10;
 
   if (wall.kind === "face") {
-    const radius = [
-      wall.align === "full" && wall.openNorth && wall.openWest ? WALL_CORNER_RADIUS : "0",
-      wall.align === "full" && wall.openNorth && wall.openEast ? WALL_CORNER_RADIUS : "0",
-      "0",
-      "0",
-    ].join(" ");
-
     return (
       <div
         style={{
           position: "absolute",
-          top: 0,
+          bottom: 0,
           left,
           zIndex,
           width,
-          height: size,
-          borderRadius: radius,
+          height,
+          borderRadius: "0 0 0 0",
           overflow: "hidden",
           ...getWallEdgeBackground("to bottom", wall.darker),
         }}
@@ -81,13 +78,13 @@ const WallView = ({ size, zIndex, wall }: WallViewProps) => {
     <div
       style={{
         position: "absolute",
-        top: 0,
+        bottom: 0,
         left,
         zIndex,
         width,
-        height: size,
+        height,
         backgroundColor: WALL_COLORS.cap,
-        borderRadius: capRadius(wall),
+        borderRadius: drawCapRadius(wall),
       }}
     />
   );

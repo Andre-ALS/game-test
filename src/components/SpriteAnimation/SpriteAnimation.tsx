@@ -123,8 +123,8 @@ const SpriteAnimation = ({
       <div
         className={styles.sheet}
         style={{
-          width: columns * width,
-          height: rows * height,
+          width: width,
+          height: height,
           backgroundImage: `url(${image})`,
           backgroundSize: `${columns * width}px ${rows * height}px`,
           backgroundPosition: `-${displayFrame * width}px -${row * height}px`,

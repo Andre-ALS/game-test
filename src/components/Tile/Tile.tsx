@@ -4,13 +4,16 @@ import styles from "./Tile.module.css";
 
 import { EQUIPMENTS_ICONS } from "../../constants/equipments";
 import { GAME_MAP, GAME_MAP_PLACEMENTS } from "../../constants/map";
-import { getTilePlacement } from "../../helpers/map";
-import { getWallVariant, wallShowsFloorBehind } from "../../helpers/wall";
-import WallView from "../Wall/WallView";
-
-import groundImage from "../../assets/ground-2.png";
-
 import { TILE_COLORS, TILE_SIZE, TILE_TO_EQUIPMENT, Tiles } from "../../constants/tile";
+
+import { getTilePlacement } from "../../helpers/map";
+import { getWallVariant } from "../../helpers/wall";
+
+import groundImage from "../../assets/ground.png";
+
+import WallView from "../Wall/WallView";
+import TilePosition from "./components/TilePosition";
+import Equipment from "../Equipment/Equipment";
 
 interface TileProps {
   x: number;
@@ -18,20 +21,16 @@ interface TileProps {
   tile: Tiles;
 }
 
+const SHOW_TILE_POSITION = false;
+
 const Tile = ({ x, y, tile }: TileProps) => {
   const facingTile = GAME_MAP[y]?.[x];
   const facingEquipment = TILE_TO_EQUIPMENT[facingTile];
   const placement = getTilePlacement(GAME_MAP_PLACEMENTS, x, y);
   const equipmentIcon =
     facingEquipment && placement.isAnchor ? EQUIPMENTS_ICONS[facingEquipment] : null;
-  const equipmentRotation = equipmentIcon?.rotations[placement.orientation];
-  const boxWidth = equipmentRotation ? equipmentRotation.width : 0;
-  const boxHeight = equipmentRotation ? equipmentRotation.height : 0;
   const walls = tile === Tiles.WALL ? getWallVariant(GAME_MAP, x, y) : null;
-  const showFloor =
-    tile === Tiles.FLOOR ||
-    Boolean(facingEquipment) ||
-    (walls !== null && wallShowsFloorBehind(walls, GAME_MAP, x, y));
+  const showFloor = tile === Tiles.FLOOR || Boolean(facingEquipment);
 
   return (
     <div
@@ -47,26 +46,13 @@ const Tile = ({ x, y, tile }: TileProps) => {
         } as React.CSSProperties
       }
     >
-      {/* <div
-        style={{
-          fontFamily: "monospace",
-          fontSize: "8px",
-          backgroundColor: "white",
-          width: "fit-content",
-          zIndex: 99999,
-          position: "absolute",
-          top: 15,
-          left: 15,
-        }}
-      >
-        {JSON.stringify(x)},{JSON.stringify(y)}
-      </div> */}
+      {SHOW_TILE_POSITION && <TilePosition x={x} y={y} />}
 
       {walls?.map((wall, index) => (
         <WallView key={index} size={TILE_SIZE} zIndex={y + 1} wall={wall} />
       ))}
 
-      {equipmentIcon && equipmentRotation && (
+      {/* {equipmentIcon && equipmentRotation && (
         <div
           style={{
             position: "relative",
@@ -74,12 +60,13 @@ const Tile = ({ x, y, tile }: TileProps) => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
+            height: "100%",
           }}
         >
           <div
             style={{
               position: "absolute",
-              top: equipmentRotation.top,
+              bottom: equipmentRotation.bottom,
               left: equipmentRotation.left,
               width: boxWidth,
               height: boxHeight,
@@ -99,7 +86,7 @@ const Tile = ({ x, y, tile }: TileProps) => {
               }}
             />
           </div>
-          {/* <div
+          <div
             style={{
               position: "absolute",
               top: "20px",
@@ -117,8 +104,12 @@ const Tile = ({ x, y, tile }: TileProps) => {
             }}
           >
             {equipmentIcon.alt}
-          </div> */}
+          </div>
         </div>
+      )} */}
+
+      {equipmentIcon && (
+        <Equipment equipment={equipmentIcon} placement={placement.orientation} yIndex={y} />
       )}
     </div>
   );

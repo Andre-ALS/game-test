@@ -2,26 +2,16 @@ import { Tiles } from "../constants/tile";
 
 export type WallAlign = "left" | "right" | "full";
 
-export interface WallFaceDraw {
-  kind: "face";
-  darker: boolean;
-  openNorth: boolean;
-  openWest: boolean;
-  openEast: boolean;
-  align: WallAlign;
-}
-
-export interface WallCapDraw {
-  kind: "cap";
+export interface WallDraw {
+  kind: "cap" | "face";
   openNorth: boolean;
   openEast: boolean;
   openWest: boolean;
   align: WallAlign;
+  darker?: boolean;
   /** Which top corner of the strip to round. Defaults from align (outer corners). */
   roundTop?: "left" | "right";
 }
-
-export type WallDraw = WallFaceDraw | WallCapDraw;
 
 export function isWallAt(map: Tiles[][], x: number, y: number): boolean {
   return map[y]?.[x] === Tiles.WALL;
@@ -151,9 +141,10 @@ function topCornerPieces(
   const cornerAlignSide: WallAlign = fromBelow ?? (corner === "top-left" ? "right" : "left");
   const floorWest = isFloorAt(map, x - 1, y);
   const floorEast = isFloorAt(map, x + 1, y);
-  const roundTop: WallCapDraw["roundTop"] = floorEast && !floorWest ? "right" : floorWest && !floorEast ? "left" : undefined;
+  const roundTop: WallDraw["roundTop"] =
+    floorEast && !floorWest ? "right" : floorWest && !floorEast ? "left" : undefined;
 
-  const cornerPiece: WallCapDraw = {
+  const cornerPiece: WallDraw = {
     kind: "cap",
     openNorth,
     openEast,
@@ -174,7 +165,7 @@ function topCornerPieces(
     return [cornerPiece];
   }
 
-  const facePiece: WallFaceDraw = {
+  const facePiece: WallDraw = {
     kind: "face",
     darker: true,
     openNorth,
@@ -184,49 +175,6 @@ function topCornerPieces(
   };
 
   return [facePiece, cornerPiece];
-}
-
-export function wallShowsFloorBehind(
-  walls: WallDraw[],
-  map: Tiles[][],
-  x: number,
-  y: number,
-): boolean {
-  const coversLeft = walls.some((wall) => wall.align === "left" || wall.align === "full");
-  const coversRight = walls.some((wall) => wall.align === "right" || wall.align === "full");
-
-  if (coversLeft && !coversRight) {
-    return isFloorAt(map, x + 1, y);
-  }
-
-  if (coversRight && !coversLeft) {
-    return isFloorAt(map, x - 1, y);
-  }
-
-  return walls.some((wall) => {
-    if (wall.kind !== "cap" || !wall.openNorth) {
-      return false;
-    }
-
-    const roundLeft =
-      wall.align === "full"
-        ? wall.openWest
-        : wall.roundTop === "left" || (wall.roundTop === undefined && wall.align === "right");
-    const roundRight =
-      wall.align === "full"
-        ? wall.openEast
-        : wall.roundTop === "right" || (wall.roundTop === undefined && wall.align === "left");
-
-    if (roundLeft && (isFloorAt(map, x - 1, y) || isFloorAt(map, x, y - 1))) {
-      return true;
-    }
-
-    if (roundRight && (isFloorAt(map, x + 1, y) || isFloorAt(map, x, y - 1))) {
-      return true;
-    }
-
-    return false;
-  });
 }
 
 export function getWallVariant(map: Tiles[][], x: number, y: number): WallDraw[] | null {
@@ -252,7 +200,7 @@ export function getWallVariant(map: Tiles[][], x: number, y: number): WallDraw[]
     return [
       {
         kind: "face",
-        darker: true,
+        darker: isVoidAt(map, x, y + 1),
         openNorth,
         openWest,
         openEast,
@@ -264,13 +212,10 @@ export function getWallVariant(map: Tiles[][], x: number, y: number): WallDraw[]
   const align = preferredAlign(map, x, y);
 
   if (openSouth) {
-    const southOob = map[y + 1]?.[x] === undefined;
-    const northOob = map[y - 1]?.[x] === undefined;
-
     return [
       {
         kind: "face",
-        darker: southOob || (isFloorAt(map, x, y + 1) && !northOob),
+        darker: isVoidAt(map, x, y + 1),
         openNorth,
         openWest,
         openEast,

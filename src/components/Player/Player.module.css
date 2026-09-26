@@ -5,11 +5,11 @@
   align-self: start;
   justify-self: start;
 
-  width: var(--tile-size);
-  height: var(--tile-size);
+  width: fit-content;
+  height: fit-content;
 
   position: relative;
-  top: -14px;
+  bottom: var(--obj-tile-bottom-offset);
 
   display: flex;
   align-items: center;

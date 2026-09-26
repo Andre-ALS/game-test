@@ -39,7 +39,7 @@ export enum Equipments {
 }
 
 // Max 9 characters
-export const EQUIPMENTS_NAMES: Record<Equipments, string> = {
+export const EQUIPMENT_NAMES: Record<Equipments, string> = {
   [Equipments.CUP_STATION]: "Copos",
   [Equipments.COFFEE_STATION]: "Café",
   [Equipments.TEA_STATION]: "Chá",
@@ -84,127 +84,127 @@ export const EQUIPMENT_FOOTPRINT: Record<Equipments, number> = {
   [Equipments.TRASH_BIN]: 1,
 };
 
-export const EQUIPMENTS_ICONS: Record<Equipments, EquipmentImageProperties> = {
+export const EQUIPMENT_ICONS: Record<Equipments, EquipmentImageProperties> = {
   [Equipments.CUP_STATION]: {
     src: cupStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.CUP_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.CUP_STATION],
+    orientations: {
       horizontal: { width: 76, height: 45, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 1.5 },
       vertical: { width: 45, height: 86, bottom: OBJ_TILE_BOTTOM_OFFSET, left: -2 },
     },
   },
   [Equipments.COFFEE_STATION]: {
     src: coffeeStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.COFFEE_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.COFFEE_STATION],
+    orientations: {
       single: { width: 38, height: 48, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },
   [Equipments.TEA_STATION]: {
     src: teaStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.TEA_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.TEA_STATION],
+    orientations: {
       single: { width: 38, height: 40, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },
   [Equipments.WATER_STATION]: {
     src: waterStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.WATER_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.WATER_STATION],
+    orientations: {
       single: { width: 38, height: 44, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },
   [Equipments.MILK_STATION]: {
     src: milkStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.MILK_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.MILK_STATION],
+    orientations: {
       single: { width: 38, height: 44, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },
   [Equipments.SODA_STATION]: {
     src: sodaStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.SODA_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.SODA_STATION],
+    orientations: {
       single: { width: 38, height: 44, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },
   [Equipments.JUICE_STATION]: {
     src: juiceStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.JUICE_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.JUICE_STATION],
+    orientations: {
       single: { width: 38, height: 44, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },
   [Equipments.CHOCOLATE_STATION]: {
     src: chocolateStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.CHOCOLATE_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.CHOCOLATE_STATION],
+    orientations: {
       single: { width: 38, height: 44, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },
   [Equipments.ICE_STATION]: {
     src: iceStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.ICE_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.ICE_STATION],
+    orientations: {
       single: { width: 38, height: 32, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },
   [Equipments.PREPARATION_STATION]: {
     src: preparationStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.PREPARATION_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.PREPARATION_STATION],
+    orientations: {
       horizontal: { width: 78, height: 42, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 1 },
       vertical: { width: 45, height: 86, bottom: OBJ_TILE_BOTTOM_OFFSET, left: -2 },
     },
   },
   [Equipments.MIXER]: {
     src: mixerIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.MIXER],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.MIXER],
+    orientations: {
       single: { width: 38, height: 44, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },
   [Equipments.BLENDER]: {
     src: blenderIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.BLENDER],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.BLENDER],
+    orientations: {
       single: { width: 38, height: 48, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },
   [Equipments.HEATING_STATION]: {
     src: heatingStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.HEATING_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.HEATING_STATION],
+    orientations: {
       single: { width: 38, height: 38, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 1 },
     },
   },
   [Equipments.TOPPING_STATION]: {
     src: toppingStationIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.TOPPING_STATION],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.TOPPING_STATION],
+    orientations: {
       horizontal: { width: 78, height: 40, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
       vertical: { width: 45, height: 86, bottom: OBJ_TILE_BOTTOM_OFFSET, left: -2 },
     },
   },
   [Equipments.CUP_SEALER]: {
     src: cupSealerIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.CUP_SEALER],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.CUP_SEALER],
+    orientations: {
       single: { width: 38, height: 48, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },
   [Equipments.SERVING_COUNTER]: {
     src: servingCounterIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.SERVING_COUNTER],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.SERVING_COUNTER],
+    orientations: {
       horizontal: { width: 78, height: 45, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
       vertical: { width: 45, height: 86, bottom: OBJ_TILE_BOTTOM_OFFSET, left: -2 },
     },
   },
   [Equipments.TRASH_BIN]: {
     src: trashBinIcon,
-    alt: EQUIPMENTS_NAMES[Equipments.TRASH_BIN],
-    rotations: {
+    alt: EQUIPMENT_NAMES[Equipments.TRASH_BIN],
+    orientations: {
       single: { width: 38, height: 42, bottom: OBJ_TILE_BOTTOM_OFFSET, left: 0.5 },
     },
   },

@@ -9,7 +9,7 @@ import spriteSheet from "../../assets/sprites/player.png";
 import { Directions } from "../../constants/direction";
 import { FRAME_INTERVAL } from "../../constants/frame";
 import { PLAYER_SIZE } from "../../constants/player";
-import { OBJ_TILE_BOTTOM_OFFSET } from "../../constants/tile";
+import { OBJ_TILE_BOTTOM_OFFSET } from "../../constants/layout";
 
 interface PlayerProps {
   map: (number | null)[][];

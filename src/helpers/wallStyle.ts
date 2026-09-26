@@ -1,14 +1,10 @@
 import { WALL_BAND_STOPS } from "../constants/walls";
 
 const STRIPE_COLOR = "rgba(0, 0, 0, 0.16)";
-// Divides both TILE_SIZE (40) and the corner's 90deg quadrant evenly, so
-// every tile/corner can reuse the exact same pattern with zero offset and
-// still line up seamlessly with its neighbors.
 const STRIPE_WIDTH = 3;
 const STRIPE_GAP = 7;
 const STRIPE_PERIOD = STRIPE_WIDTH + STRIPE_GAP;
-
-export const BOTTOM_WALL_SHADE = 0.82;
+const BOTTOM_WALL_SHADE = 0.82;
 
 function darkenHex(hex: string, amount: number): string {
   const value = parseInt(hex.slice(1), 16);
@@ -19,18 +15,18 @@ function darkenHex(hex: string, amount: number): string {
   return `#${[r, g, b].map((channel) => channel.toString(16).padStart(2, "0")).join("")}`;
 }
 
-export function getWallBandStops(darker = false) {
+function getWallBandStops(darker = false) {
   if (!darker) {
     return WALL_BAND_STOPS;
   }
 
-  return WALL_BAND_STOPS.map((band) => ({
+  return WALL_BAND_STOPS.map((band, index) => ({
     ...band,
-    color: darkenHex(band.color, BOTTOM_WALL_SHADE),
+    color: index === 0 ? band.color : darkenHex(band.color, BOTTOM_WALL_SHADE),
   }));
 }
 
-export function getWallGradient(direction: string, darker = false): string {
+function getWallGradient(direction: string, darker = false): string {
   const stops = getWallBandStops(darker).flatMap(({ color, start, end }) => [
     `${color} ${start}%`,
     `${color} ${end}%`,

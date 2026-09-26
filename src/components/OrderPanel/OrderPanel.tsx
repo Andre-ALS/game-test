@@ -5,7 +5,7 @@ import styles from "./OrderPanel.module.css";
 import { OrderStatus } from "../../constants/orders";
 import { RECIPE_STEPS_ACTION_NAMES } from "../../constants/recipeSteps";
 import { INGREDIENTS_NAMES } from "../../constants/ingredients";
-import { EQUIPMENTS_NAMES } from "../../constants/equipments";
+import { EQUIPMENT_NAMES } from "../../constants/equipments";
 import { findRecipeById } from "../../constants/recipes";
 
 import type { PreparationState } from "../../hooks/usePreparation";
@@ -48,7 +48,6 @@ const OrderPanel = ({ preparation }: OrderPanelProps) => {
           const isFinished = FINISHED_STATUSES.includes(item.status);
           const isActive = !isFinished && index === activeItemIndex;
           const icon = isActive ? "👉" : ITEM_STATUS_ICON[item.status];
-
           const recipeName = findRecipeById(item.recipeId)?.name ?? item.recipeId;
 
           return (
@@ -99,7 +98,7 @@ const OrderPanel = ({ preparation }: OrderPanelProps) => {
                 <ul className={styles.wrongStepsList}>
                   {wrongEquipments.map((equipmentId) => (
                     <li key={equipmentId} style={{ marginTop: "4px" }}>
-                      {EQUIPMENTS_NAMES[equipmentId]}
+                      {EQUIPMENT_NAMES[equipmentId]}
                     </li>
                   ))}
                 </ul>

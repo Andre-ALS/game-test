@@ -21,6 +21,7 @@ export const BASE_MAP: Tiles[][] = [
   [1, 0, 0, 1, 1, 1, 0, 0, 0, 1],
   [1, 1, 1, 1, -1, 1, 1, 1, 1, 1],
 ];
-export const mapSanitized = sanitizedMap(BASE_MAP);
-export const GAME_MAP = mapSanitized.map;
-export const GAME_MAP_PLACEMENTS = mapSanitized.placements;
+
+const { map: GAME_MAP, placements: GAME_MAP_PLACEMENTS } = sanitizedMap(BASE_MAP);
+
+export { GAME_MAP, GAME_MAP_PLACEMENTS };

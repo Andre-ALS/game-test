@@ -10,15 +10,12 @@ import { usePreparation } from "./hooks/usePreparation";
 import Tile from "./components/Tile/Tile";
 import Player from "./components/Player/Player";
 import GameMap from "./components/GameMap/GameMap";
-import DirectionalButtons from "./components/DirectionalButtons/DirectionalButtons";
-import OrderPanel from "./components/Kitchen/OrderPanel";
+import OrderPanel from "./components/OrderPanel/OrderPanel";
 
 const INTERACT_KEY = " ";
 
 const App = () => {
-  const [playerPosition, setPlayerPosition] = useState<Position>({ x: 0, y: 0 });
-  const [playerViewDirection, setPlayerViewDirection] = useState<Position>({ x: 0, y: 0 });
-
+  const [facingTile, setFacingTile] = useState<Position>({ x: 0, y: 0 });
   const preparation = usePreparation();
 
   useEffect(() => {
@@ -29,11 +26,11 @@ const App = () => {
 
       event.preventDefault();
 
-      const facingTile = GAME_MAP[playerViewDirection.y]?.[playerViewDirection.x];
-      const facingEquipment = TILE_TO_EQUIPMENT[facingTile];
+      const tile = GAME_MAP[facingTile.y]?.[facingTile.x];
+      const equipment = TILE_TO_EQUIPMENT[tile];
 
-      if (facingEquipment) {
-        preparation.interact(facingEquipment);
+      if (equipment) {
+        preparation.interact(equipment);
       }
     };
 
@@ -42,33 +39,11 @@ const App = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [playerViewDirection, preparation]);
+  }, [facingTile, preparation]);
 
   return (
     <>
-      {/* <div
-        style={{
-          position: "absolute",
-          top: "12px",
-          left: "12px",
-          zIndex: 1000,
-          backgroundColor: "white",
-          padding: "10px",
-          borderRadius: "4px",
-          fontFamily: "monospace",
-          display: "flex",
-          flexDirection: "column",
-          gap: "8px",
-        }}
-      >
-        {[`📍 ${JSON.stringify(playerPosition)}`, `👁️ ${JSON.stringify(playerViewDirection)}`].map(
-          (text, index) => (
-            <div key={index}>{text}</div>
-          ),
-        )}
-      </div> */}
-
-      {/* <OrderPanel preparation={preparation} /> */}
+      <OrderPanel preparation={preparation} />
 
       <GameMap>
         {GAME_MAP.map((row, y) =>
@@ -79,27 +54,23 @@ const App = () => {
           map={GAME_MAP}
           tileSize={TILE_SIZE}
           onMoveCallback={(position, direction) => {
-            setPlayerPosition(position);
-
             switch (direction) {
               case Directions.UP:
-                setPlayerViewDirection({ x: position.x, y: position.y - 1 });
+                setFacingTile({ x: position.x, y: position.y - 1 });
                 break;
               case Directions.DOWN:
-                setPlayerViewDirection({ x: position.x, y: position.y + 1 });
+                setFacingTile({ x: position.x, y: position.y + 1 });
                 break;
               case Directions.LEFT:
-                setPlayerViewDirection({ x: position.x - 1, y: position.y });
+                setFacingTile({ x: position.x - 1, y: position.y });
                 break;
               case Directions.RIGHT:
-                setPlayerViewDirection({ x: position.x + 1, y: position.y });
+                setFacingTile({ x: position.x + 1, y: position.y });
                 break;
             }
           }}
         />
       </GameMap>
-
-      {/* <DirectionalButtons /> */}
     </>
   );
 };

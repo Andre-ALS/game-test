@@ -5,6 +5,4 @@
   background-color: var(--tile-color);
   background-image: var(--background-image);
   background-size: 40px;
-
-  border: 1px solid red;
 }

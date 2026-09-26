@@ -9,7 +9,7 @@ export interface Equipment {
   duration: number;
 }
 
-export interface EquipmentRotation {
+export interface EquipmentLayout {
   width: number;
   height: number;
   bottom: number;
@@ -19,9 +19,9 @@ export interface EquipmentRotation {
 export interface EquipmentImageProperties {
   src: string;
   alt: string;
-  rotations: {
-    horizontal?: EquipmentRotation;
-    vertical?: EquipmentRotation;
-    single?: EquipmentRotation;
+  orientations: {
+    horizontal?: EquipmentLayout;
+    vertical?: EquipmentLayout;
+    single?: EquipmentLayout;
   };
 }

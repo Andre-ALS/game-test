@@ -6,7 +6,6 @@ interface WallViewProps {
   size: number;
   zIndex: number;
   wall: WallDraw;
-  bottomOffset?: number;
 }
 
 function stripLayout(size: number, align: WallAlign): { left: number; width: number } {
@@ -36,7 +35,6 @@ function drawCapRadius(wall: WallDraw): string {
     return "0";
   }
 
-  // Inner split corners round toward the floor; outer corners round toward the unused half.
   const roundLeft =
     wall.roundTop === "left" || (wall.roundTop === undefined && wall.align === "right");
   const roundRight =
@@ -52,8 +50,6 @@ function drawCapRadius(wall: WallDraw): string {
 
 const WallView = ({ size, zIndex, wall }: WallViewProps) => {
   const { left, width } = stripLayout(size, wall.align);
-  // Lift the wall for the tall face, but keep the bottom flush with the tile so
-  // no transparent gap opens on the south edge.
   const height = size + 10;
 
   if (wall.kind === "face") {
@@ -66,7 +62,6 @@ const WallView = ({ size, zIndex, wall }: WallViewProps) => {
           zIndex,
           width,
           height,
-          borderRadius: "0 0 0 0",
           overflow: "hidden",
           ...getWallEdgeBackground("to bottom", wall.darker),
         }}

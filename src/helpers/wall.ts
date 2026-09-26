@@ -13,11 +13,11 @@ export interface WallDraw {
   roundTop?: "left" | "right";
 }
 
-export function isWallAt(map: Tiles[][], x: number, y: number): boolean {
+function isWallAt(map: Tiles[][], x: number, y: number): boolean {
   return map[y]?.[x] === Tiles.WALL;
 }
 
-export function isFloorAt(map: Tiles[][], x: number, y: number): boolean {
+function isFloorAt(map: Tiles[][], x: number, y: number): boolean {
   const tile = map[y]?.[x];
   return tile !== undefined && tile !== Tiles.NONE && tile !== Tiles.WALL;
 }
@@ -118,7 +118,7 @@ function columnAlignFromBelow(map: Tiles[][], x: number, y: number): WallAlign |
     return null;
   }
 
-  const below = getWallVariant(map, x, y + 1);
+  const below = getWallPieces(map, x, y + 1);
   const column = below?.find((piece) => piece.kind === "cap") ?? below?.[0];
 
   if (column?.align === "left" || column?.align === "right") {
@@ -177,7 +177,7 @@ function topCornerPieces(
   return [facePiece, cornerPiece];
 }
 
-export function getWallVariant(map: Tiles[][], x: number, y: number): WallDraw[] | null {
+export function getWallPieces(map: Tiles[][], x: number, y: number): WallDraw[] | null {
   if (!isWallAt(map, x, y)) {
     return null;
   }
